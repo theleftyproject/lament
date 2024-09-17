@@ -1,6 +1,6 @@
 local argparse = require("argparse")
 
-local parser = argparse("lament", "A script to manage module settings")
+local parser = argparse("lament", "The gayest configuration tool")
 
 local set_cmd = parser:command("set", "Set a value for a module setting")
 set_cmd:argument("module", "The module name")
