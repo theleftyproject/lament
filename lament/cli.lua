@@ -1,48 +1,63 @@
-local args = {...}
+local argparse = require("argparse")
 
-local function print_usage()
+local parser = argparse("lament", "A script to manage module settings")
+
+local set_cmd = parser:command("set", "Set a value for a module setting")
+set_cmd:argument("module", "The module name")
+set_cmd:argument("setting", "The setting name")
+set_cmd:argument("value", "The value to set")
+
+local advanced_cmd = parser:command("advanced", "Advanced setting operations")
+advanced_cmd:argument("module", "The module name")
+advanced_cmd:argument("setting", "The setting name")
+advanced_cmd:argument("action", "The action to perform (append, remove, set)")
+advanced_cmd:argument("value", "The value to append or set")
+
+parser:command("apply", "Apply all changes")
+
+local args = parser:parse()
+
+local function print_help()
     print("Usage:")
-    print("  lament <module> <setting> <value>")
-    print("  lament <module> <setting[]> --append|--remove|--set <value>")
-    print("  lament -A|--apply")
+    print("  lament <command> [options]")
+    print()
+    print("Commands:")
+    print("  set <module> <setting> <value>                   Set a value for a module setting")
+    print("  advanced <module> <setting> <action> <value>    Advanced setting operations (append, remove, set)")
+    print("  apply                                           Apply all changes")
+    print()
+    print("Options:")
+    print("  --module <module>       The module name")
+    print("  --setting <setting>     The setting name")
+    print("  --value <value>         The value to set or append")
+    print("  --action <action>       The action to perform (append, remove, set)")
 end
 
-local function handle_set(module, setting, value)
-    print(string.format("Setting '%s' of module '%s' to '%s'.", setting, module, value))
-end
-
-local function handle_advanced(module, setting, action, value)
-    if action == '--append' then
-        print(string.format("Appending '%s' to setting '%s' of module '%s'.", value, setting, module))
-    elseif action == '--remove' then
-        print(string.format("Removing '%s' from setting '%s' of module '%s'.", value, setting, module))
-    elseif action == '--set' then
-        print(string.format("Setting '%s' of module '%s' to '%s'.", setting, module, value))
-    else
-        print("Unknown action. Use --append, --remove, or --set.")
-    end
-end
-
-local function handle_apply()
+if args._command == "apply" then
     print("Applying all changes...")
-end
-
-local command = args[1]
-
-if command == "-A" or command == "--apply" then
-    handle_apply()
-elseif #args == 3 then
-    local module, setting, value = args[1], args[2], args[3]
-    handle_set(module, setting, value)
-elseif #args >= 4 then
-    local module, setting, action = args[1], args[2], args[3]
-    local value = args[4]
-
-    if action == '--append' or action == '--remove' or action == '--set' then
-        handle_advanced(module, setting, action, value)
+elseif args._command == "set" then
+    if args.module and args.setting and args.value then
+        print(string.format("Setting '%s' of module '%s' to '%s'.", args.setting, args.module, args.value))
     else
-        print_usage()
+        print("Missing arguments for 'set' command.")
+        print_help()
+    end
+elseif args._command == "advanced" then
+    if args.module and args.setting and args.action and args.value then
+        if args.action == "append" then
+            print(string.format("Appending '%s' to setting '%s' of module '%s'.", args.value, args.setting, args.module))
+        elseif args.action == "remove" then
+            print(string.format("Removing '%s' from setting '%s' of module '%s'.", args.value, args.setting, args.module))
+        elseif args.action == "set" then
+            print(string.format("Setting '%s' of module '%s' to '%s'.", args.setting, args.module, args.value))
+        else
+            print("Unknown action. Use 'append', 'remove', or 'set'.")
+            print_help()
+        end
+    else
+        print("Missing arguments for 'advanced' command.")
+        print_help()
     end
 else
-    print_usage()
+    print_help()
 end
