@@ -58,6 +58,4 @@ elseif args._command == "advanced" then
         print("Missing arguments for 'advanced' command.")
         print_help()
     end
-else
-    print_help()
 end
