@@ -31,7 +31,7 @@ end
 -- reads a hive key
 function Hive:get_key(key)
    -- if the key exists, return its value
-   if self[key] ~= nil then
+   if self[key] then
       return self[key]
    end
 
