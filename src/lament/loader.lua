@@ -23,3 +23,5 @@ local lament = require('lament')
 local sandbox = require('sandbox')
 local effil = require('effil')
 
+-- TODO: load lament backends from /usr/share/lament/backends
+-- TODO: load lament recipes from /etc/lament/
