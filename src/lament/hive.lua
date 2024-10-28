@@ -1,4 +1,4 @@
--- key.lua - hive configuration keys
+-- hive.lua - defines LAMENT configuration hives
 --
 --     Copyright (C) 2024  Kıvılcım Defne Öztürk
 --
@@ -15,7 +15,32 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require('lament')
+local lament = require('src.lament')
 
--- creates a key in a hive
+-- defines a hive
+local Hive = {}
 
+-- instantiates a new Hive
+function Hive.new(name, default_keys)
+   return setmetatable({
+      name = name,
+      keys = default_keys
+   }, {__index = Hive})
+end
+
+-- reads a hive key
+function Hive:get_key(key)
+   -- if the key exists, return its value
+   if self[key] ~= nil then
+      return self[key]
+   end
+
+   -- else return null
+   return nil
+end
+
+-- sets a hive key
+function Hive:set_key(key, value)
+   self[key] = value
+   return self
+end
