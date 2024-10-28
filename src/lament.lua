@@ -17,7 +17,7 @@
 
 local argparse = require("argparse")
 
-local parser = argparse("lament", "The gayest configuration tool")
+local parser = argparse("lament", "Apply or recalibrate LAMENT rules")
 
 local set_cmd = parser:command("set", "Set a value for a module setting")
 set_cmd:argument("module", "The module name")

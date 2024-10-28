@@ -1,4 +1,4 @@
--- conf.lua - Main config table of LAMENT
+-- key.lua - hive configuration keys
 --
 --     Copyright (C) 2024  Kıvılcım Defne Öztürk
 --
@@ -15,5 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require('lament')
+local lament = require('src.lament')
+
+-- creates a key in a hive
 
