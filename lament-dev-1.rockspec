@@ -7,7 +7,16 @@ description = {
    homepage = "https://github.com/Sparkles-Laurel/lament",
    license = "MIT"
 }
+dependencies = {
+   "lua >= 5.4",
+   "lpeg == 1.1.0-2",
+}
 build = {
    type = "builtin",
-   modules = {}
+   modules = {
+      lament = "src/lament.lua",
+      ["lament.hive"] = "src/lament/hive.lua",
+      ["lament.key"] = "src/lament/key.lua",
+      ["lament.loader"] = "src/lament/loader.lua"
+   }
 }
