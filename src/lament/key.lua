@@ -17,5 +17,15 @@
 
 local lament = require('src.lament')
 
--- creates a key in a hive
+-- data types for keys
+local Key = {
+   name = "",
+   value = {},
+}
 
+Key.new = function(name, default_value)
+   return setmetatable({
+      name = name,
+      value = default_value,
+   }, {__index = Key})
+end
