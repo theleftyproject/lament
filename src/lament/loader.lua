@@ -20,4 +20,6 @@
 -- from other Lua bytecode?
 
 local lament = require('lament')
+local sandbox = require('sandbox')
+local effil = require('effil')
 
