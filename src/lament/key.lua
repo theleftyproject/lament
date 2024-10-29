@@ -18,7 +18,7 @@
 local lament = require('src.lament.lament')
 
 --- A key in a [Hive]
-local Key = {
+lament.Key = {
    name = "",
    value = {},
 }
@@ -27,9 +27,9 @@ local Key = {
 --- @param name string The name of the key
 --- @param default_value any Default value for the keys
 --- @return table The metatable for the new `Key` instance
-Key.new = function(name, default_value)
+lament.Key.new = function(name, default_value)
    return setmetatable({
       name = name,
       value = default_value,
-   }, {__index = Key})
+   }, {__index = lament.Key})
 end
