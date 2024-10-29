@@ -10,7 +10,7 @@ description = {
 dependencies = {
    "lua >= 5.4",
    "lpeg == 1.1.0-2",
-   "luafilesystem == scm1",
+   "luafilesystem == 1.8.0-1",
 }
 build = {
    type = "builtin",

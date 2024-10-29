@@ -19,7 +19,7 @@
 -- how in the lesbians do I fucking load Lua bytecode in
 -- from other Lua bytecode?
 
-local lament = require('lament')
+local lament = require('src.lament.lament')
 local sandbox = require('sandbox')
 local lfs = require('lfs')
 
