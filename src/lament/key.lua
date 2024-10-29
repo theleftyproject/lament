@@ -17,12 +17,16 @@
 
 local lament = require('src.lament')
 
--- data types for keys
+--- A key in a [Hive]
 local Key = {
    name = "",
    value = {},
 }
 
+--- Creates a new instance of a `Key`
+--- @param name string The name of the key
+--- @param default_value any Default value for the keys
+--- @return table The metatable for the new `Key` instance
 Key.new = function(name, default_value)
    return setmetatable({
       name = name,
