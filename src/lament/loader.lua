@@ -23,9 +23,6 @@ local lament = require('lament')
 local sandbox = require('sandbox')
 local lfs = require('lfs')
 
--- TODO: load lament backends from /usr/share/lament/backends
--- TODO: load lament recipes from /etc/lament/
-
 local conf_opts = {
    backend_location = "/usr/share/lament/backends",
    conf_dir = "/etc/lament",
@@ -53,5 +50,8 @@ local function boot_backends()
 end
 
 local function walk_recipe_dir()
-   -- TODO: Implement recipe loading
+   local recipes = {}
+   for i, recipe in ipairs(lfs.dir(conf_opts.conf_dir)) do
+      recipes[#i + 1] = recipe
+   end
 end
