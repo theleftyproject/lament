@@ -21,7 +21,37 @@
 
 local lament = require('lament')
 local sandbox = require('sandbox')
-local effil = require('effil')
+local lfs = require('lfs')
 
 -- TODO: load lament backends from /usr/share/lament/backends
 -- TODO: load lament recipes from /etc/lament/
+
+local conf_opts = {
+   backend_location = "/usr/share/lament/backends",
+   conf_dir = "/etc/lament",
+   self_conf = "/etc/lament/self.conf.lua",
+}
+
+local active_backends = {}
+
+local function walk_backend_dir()
+   local backends = {}
+   for i,file in ipairs(lfs.dir(conf_opts.backend_location)) do
+      backends[#i + 1] = file
+   end
+
+   return backends
+end
+
+local function boot_backends()
+   local backends = walk_backend_dir()
+   for backend in backends do
+      active_backends[backend] = {
+       -- TODO: Boot up backend
+      }
+   end
+end
+
+local function walk_recipe_dir()
+   -- TODO: Implement recipe loading
+end
