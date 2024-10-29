@@ -23,16 +23,22 @@ local lament = require('lament')
 local sandbox = require('sandbox')
 local lfs = require('lfs')
 
+--- global configuration options
 local conf_opts = {
    backend_location = "/usr/share/lament/backends",
    conf_dir = "/etc/lament",
    self_conf = "/etc/lament/self.conf.lua",
 }
+-- @todo load these from self.conf.lua
 
+--- Table of active LAMENT backends that are running
 local active_backends = {}
 
+--- Walks through the backends directory specified in the configuration options
+--- @return table backends List of the backends available to LAMENT
 local function walk_backend_dir()
    local backends = {}
+   -- walk through the backends directory
    for i,file in ipairs(lfs.dir(conf_opts.backend_location)) do
       backends[#i + 1] = file
    end
@@ -40,15 +46,17 @@ local function walk_backend_dir()
    return backends
 end
 
+--- Starts up the backends
 local function boot_backends()
    local backends = walk_backend_dir()
    for backend in backends do
       active_backends[backend] = {
-       -- TODO: Boot up backend
+      -- @todo Boot up backend
       }
    end
 end
 
+--- Walks through a recipes directory specified in the configuration
 local function walk_recipe_dir()
    local recipes = {}
    for i, recipe in ipairs(lfs.dir(conf_opts.conf_dir)) do
