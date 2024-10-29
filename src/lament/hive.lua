@@ -17,10 +17,13 @@
 
 local lament = require('src.lament')
 
--- defines a hive
+--- Defines a configuration hive.
 local Hive = {}
 
--- instantiates a new Hive
+--- Creates a new instance of a hive.
+---@param name string The name of the hive.
+---@param default_keys table The default values of the key sets
+---@return table Hive the newly created hive.
 function Hive.new(name, default_keys)
    return setmetatable({
       name = name,
@@ -28,7 +31,9 @@ function Hive.new(name, default_keys)
    }, {__index = Hive})
 end
 
--- reads a hive key
+--- Reads a hive key.
+--- @param key string The name of the key to read
+--- @return table? Key the key that was read
 function Hive:get_key(key)
    -- if the key exists, return its value
    if self[key] then
@@ -39,7 +44,10 @@ function Hive:get_key(key)
    return nil
 end
 
--- sets a hive key
+--- Sets the value for a key in a hive.
+--- @param key string The name of the key to set.
+--- @param value table The value of the config key.
+--- @return table Hive This configuration hive.
 function Hive:set_key(key, value)
    self[key] = value
    return self
