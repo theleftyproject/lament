@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require('src.lament')
+local lament = require('src.lament.lament')
 
 --- Defines a configuration hive.
 local Hive = {}
