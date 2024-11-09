@@ -1,4 +1,4 @@
--- key.lua - hive configuration keys
+-- backend.lua - defines backend API functions
 --
 --     Copyright (C) 2024  Kıvılcım Defne Öztürk
 --
@@ -16,20 +16,13 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require('lament')
+local lament_hive = require('lament.hive')
+local lpeg = require('lpeg')
+local lfs = require('lfs')
 
---- A key in a [Hive]
-lament.Key = {
-   name = "",
-   value = {},
-}
+--- defines a LAMENT backend
+lament.backend.Backend = {}
 
---- Creates a new instance of a `Key`
---- @param name string The name of the key
---- @param default_value any Default value for the keys
---- @return table The metatable for the new `Key` instance
-lament.Key.new = function(name, default_value)
-   return setmetatable({
-      name = name,
-      value = default_value,
-   }, {__index = lament.Key})
+function lament.backend.Backend.new(name)
+   -- @todo
 end

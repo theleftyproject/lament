@@ -19,7 +19,7 @@
 -- how in the lesbians do I fucking load Lua bytecode in
 -- from other Lua bytecode?
 
-local lament = require('lament.lament')
+local lament = require('lament')
 local sandbox = require('sandbox')
 local lfs = require('lfs')
 
@@ -55,10 +55,8 @@ end
 --- Starts up the backends
 local function boot_backends()
    local backends = lament.backends.walk_backend_dir()
-   for backend in backends do
-      lament.active_backends[backend] = {
-      -- @todo Boot up backend
-      }
+   for i, backend in ipairs(backends) do
+      lament.active_backends[i] = backend.init()
    end
 end
 
