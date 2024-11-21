@@ -23,6 +23,45 @@ local lfs = require('lfs')
 --- defines a LAMENT backend
 lament.backend.Backend = {}
 
+--- creates a new LAMENT backend
+---
+--- @param name string The name for the backend
+--- @return table lament.backend.Backend the newly created backend
 function lament.backend.Backend.new(name)
-   -- @todo
+   return setmetatable({
+      --- The name for the backend
+      name = name,
+      --- Whether the backend is active or not
+      active = false,
+      --- The hives registered by the backend
+      hives = {},
+      --- The files demanded by the backend
+      files = {},
+      ---defines the behaviour of the bakckend on initialization.
+      ---@param backend table the backend being initialized
+      ---@param hives table the hives the backend will register
+      ---@param files table the files the backend will access
+      ---@return boolean success whether activation was successful or not.
+      on_init = function (backend, hives, files) return true end,
+      on_exit = function (backend, hives, files) return true end,
+   }, {__index = lament.backend.Backend})
+end
+
+--- Initializes the backend
+--- The function merely calls the `on_init` function of the backend
+--- and sets `active` to `true`
+function lament.backend.Backend:init()
+   if self:on_init(self.hives, self.files) then
+      self.active = true
+   end
+   return self
+end
+
+--- Shuts the backend down
+---@return table
+function lament.backend.Backend:exit()
+   if self:on_exit(self.hives, self.files) then
+      self.active = false
+   end
+   return self
 end
