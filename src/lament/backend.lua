@@ -37,6 +37,10 @@ function lament.backend.Backend.new(name)
       hives = {},
       --- The files demanded by the backend
       files = {},
+      --- The capabilities of the backend
+      -- TODO: add permissions to backends, like accessing
+      -- systemd commands or just editing files
+      capabilities = {},
       ---defines the behaviour of the bakckend on initialization.
       ---@param backend table the backend being initialized
       ---@param hives table the hives the backend will register
