@@ -69,3 +69,13 @@ function lament.backend.Backend:exit()
    end
    return self
 end
+
+--- Forwards-applies the configuration as specified by the backend
+function lament.backend.Backend:apply()
+   return true
+end
+
+--- Backwards-applies the configuration as specified by the backend
+function lament.backend.Backend:recalibrate()
+   return true
+end
