@@ -72,8 +72,8 @@ function lament.backends.walk_backend_dir()
          if err ~= nil then
             return nil, err
          elseif backend == nil then
-            return nil,  {
-               message = string.format("Backend is nil."),
+            return nil, {
+               message = string.format("Backend \"%s\" is nil.", file),
                position = {
                   line = debug.getinfo(2, "l").currentline,
                   file = debug.getinfo(2, "S").source,
