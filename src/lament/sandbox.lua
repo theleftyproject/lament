@@ -58,3 +58,6 @@ local lefty_safeenv = {
    lpeg = {},
    lament = {},
 }
+lament.sandbox.safeenv = lefty_safeenv
+
+return lament.sandbox

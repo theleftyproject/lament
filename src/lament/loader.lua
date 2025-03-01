@@ -67,9 +67,20 @@ function lament.backends.walk_backend_dir()
             }
          end
          -- register the backend
-         local backend = nil
+         local backend, err = load(bytecode, nil, "b", sandbox.safeenv)
+         if err ~= nil then
+            return nil, err
+         elseif backend == nil then
+            return nil,  {
+               message = string.format("Backend is nil."),
+               position = {
+                  line = debug.getinfo(2, "l").currentline,
+                  file = debug.getinfo(2, "S").source,
+               },
+            }
+         end
          -- @todo add error handling here
-         backends[#i + 1] = backend
+         backends[#i + 1] = backend["init"]()
       end
        ::continue::
    end
