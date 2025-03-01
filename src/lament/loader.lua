@@ -58,16 +58,16 @@ function lament.backends.walk_backend_dir()
       else
          local bytecode = backend_file:read("*a")
          if not bytecode then
-            return nil, error({
+            return nil, {
                message = string.format("failed to execute \"%s\"", file),
                position = {
                   line = debug.getinfo(2, "l").currentline,
                   file = debug.getinfo(2, "S").source,
                },
-            })
+            }
          end
          -- register the backend
-         local backend = sandbox.run(bytecode)["on_init"]()
+         local backend = nil
          -- @todo add error handling here
          backends[#i + 1] = backend
       end
