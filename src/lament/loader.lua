@@ -56,6 +56,7 @@ function lament.backends.walk_backend_dir()
       elseif not backend_file then
          goto continue
       else
+         -- if backend is present we load the file
          local bytecode = backend_file:read("*a")
          if not bytecode then
             return nil, {
