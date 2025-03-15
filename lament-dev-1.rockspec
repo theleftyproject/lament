@@ -18,6 +18,8 @@ build = {
       lament = "src/lament.lua",
       ["lament.hive"] = "src/lament/hive.lua",
       ["lament.key"] = "src/lament/key.lua",
-      ["lament.loader"] = "src/lament/loader.lua"
+      ["lament.loader"] = "src/lament/loader.lua",
+      ["lament.backend"] = "src/lament/backend/backend.lua",
+      ["lament.backend.sandbox"] = "src/lament/backend/sandbox.lua"
    }
 }
