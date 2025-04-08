@@ -2,3 +2,9 @@
 /lua
 /lua_modules
 /.luarocks
+/docs/*.pdf
+/docs/*.fls
+/docs/*.aux
+/docs/*.synctex.gz
+/docs/*.fdb_latexmk
+/docs/*.log
