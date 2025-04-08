@@ -1,7 +1,10 @@
 {
    "recommendations": [
+      // for lua
       "sumneko.lua",
+      // for editorconfig
       "EditorConfig.EditorConfig",
+      // for latex
       "tecosaur.latex-utilities",
       "James-Yu.latex-workshop"
    ]
