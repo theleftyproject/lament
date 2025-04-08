@@ -1,6 +1,8 @@
 {
    "recommendations": [
       "sumneko.lua",
-      "EditorConfig.EditorConfig"
+      "EditorConfig.EditorConfig",
+      "tecosaur.latex-utilities",
+      "James-Yu.latex-workshop"
    ]
 }
