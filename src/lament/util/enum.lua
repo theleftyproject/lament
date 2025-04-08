@@ -1,10 +1,7 @@
 local lament = require('lament')
 
---- Helpful utilities for making LAMENT
-lament.util = {
-   --- Enums and discriminated unions
-   enum = {}
-}
+--- Enums and discriminated unions
+lament.util.enum = {}
 
 local function inner(key)
    return function(data)
@@ -38,3 +35,5 @@ function lament.util.enum.Enum(...)
 
    return tbl
 end
+
+return lament.util.enum

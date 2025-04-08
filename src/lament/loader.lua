@@ -53,7 +53,7 @@ function lament.backends.walk_backend_dir()
 end
 
 --- Starts up the backends
-local function boot_backends()
+function lament.boot_backends()
    local backends = lament.backends.walk_backend_dir()
    for i, backend in ipairs(backends) do
       lament.active_backends[i] = backend.init()
@@ -61,7 +61,7 @@ local function boot_backends()
 end
 
 --- Walks through a recipes directory specified in the configuration
-local function walk_recipe_dir()
+function lament.walk_recipe_dir()
    for i, recipe in ipairs(lfs.dir(lament.conf_opts.conf_dir)) do
       lament.recipes[#i + 1] = recipe
    end
