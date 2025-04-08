@@ -3,8 +3,12 @@
 ## Preamble
 Free and open source software development is a collaborative job. Various people work on the source code, and different people have different styles of programming. While we value diversity a lot here, the presence of a unified coding style is essential for everyone to provide a more comfortable and convenient environment to collaborate. Therefore, decisions about the style of the code, the way the pull requests are described, and the way pull requests are merged should be standardised.
 
-## General Rules
-- Abide by the [Code of Conduct](CODE_OF_CONDUCT.md). We are very strict about this one. We will not tolerate harassment of any contributors here.
+## Toolchain
+- LAMENT is written in [Lua](https://lua.org), supports [LuaJIT](https://luajit.org/) and is built using [Luarocks](https://luarocks.org)
+- We use [`asdf`](https://asdf-vm.com) to manage the versions of Lua and LuaJIT
+- For documentation, we both use Lua's internal triple-dash (`---`) documentation syntax, and also LaTeX with the AMS-TeX package.
+  - The LaTeX processor we prefer is LuaLaTeX, but you can use an alternative processor if you need
+- The `.envrc` file in the repository root configures your development environment using [`direnv`](https://direnv.net/)
 
 ## Coding style
 - We generally follow the [style guidelines of LuaRocks](https://github.com/luarocks/lua-style-guide).
