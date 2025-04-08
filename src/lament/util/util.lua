@@ -1,4 +1,4 @@
--- lament.lua - provides the global system configuration of LAMENT
+-- util.lua - utilities
 --
 --     Copyright (C) 2024  Kıvılcım Defne Öztürk
 --
@@ -15,23 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require("lament.executor")
+local lament = require("lament")
 
-local lament = {
-   --- Global system state
-   _sysconf = {
-      --- Self-configuration of LAMENT
-      ["lament"] = {
-         _auto = true,
-         --- Behaviour of LAMENT in case application fails
-         cease_and = lament.executor.CeaseAnd.halt
-      }
-   }
-}
-
-require('lament.hive')
-require('lament.key')
-require('lament.loader')
-
-
-return lament
+--- Utilities helpful in making LAMENT
+lament.util = {}
