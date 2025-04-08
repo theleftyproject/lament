@@ -1,6 +1,6 @@
 -- loader.lua - loads LAMENT config modules
 --
---     Copyright (C) 2024  Kıvılcım Defne Öztürk
+--     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
