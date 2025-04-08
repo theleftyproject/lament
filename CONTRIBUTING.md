@@ -3,6 +3,9 @@
 ## Preamble
 Free and open source software development is a collaborative job. Various people work on the source code, and different people have different styles of programming. While we value diversity a lot here, the presence of a unified coding style is essential for everyone to provide a more comfortable and convenient environment to collaborate. Therefore, decisions about the style of the code, the way the pull requests are described, and the way pull requests are merged should be standardised.
 
+## General Rules
+- Abide by the [Code of Conduct](CODE_OF_CONDUCT.md). We are very strict about this one. We will not tolerate harassment of any contributors here.
+
 ## Coding style
 - We generally follow the [style guidelines of LuaRocks](https://github.com/luarocks/lua-style-guide).
 - However we have one strict enforcement, use `local function`s whenever possible.
