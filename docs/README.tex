@@ -1,6 +1,6 @@
 %%  docs/README.tex - Introduction to the documentation.
 %%
-%%     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
+%%     Copyright (C) 2024-2025
 %%
 %% This program is free software: you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -15,11 +15,11 @@
 %% You should have received a copy of the GNU General Public License
 %% along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-
-\documentclass{amsbook}
+\documentclass{book}
 \usepackage[utf8]{inputenc}
-
-
+\usepackage{hyperref}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=1in, bottom=1in]{geometry}
+\usepackage{microtype}
 \title{LAMENT: Lefty Application, Modification, Editing and Notification Tool}
 \author{S. L. S. Sacramentum}
 \date{08 April 2025}
@@ -29,6 +29,7 @@
     \pagenumbering{roman}
     \tableofcontents
     \pagenumbering{arabic}
+    \chapter{The Documentation Preamble}
     \section{Introduction}
     This is the first booklet in the documentation of Lefty Framework, which covers the documentation for LAMENT.
     LAMENT is the reference implementation of Sacramentum's Configuration Theory. Configuration theory describes
@@ -41,9 +42,8 @@
     \newpage
     \section{License}
     \newpage
-    \section{Contributing}
     \include{CONTRIBUTING}
     \newpage
-    \section{Code of Conduct}
     \include{CODE_OF_CONDUCT}
+    \newpage
 \end{document}

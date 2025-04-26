@@ -57,6 +57,9 @@ end
 function lament.backend.Backend:init()
    if self:on_init(self.hives, self.files) then
       self.active = true
+      for i = 1, #self.hives, 1 do
+         lament._sysconf[self.hives[i].name] = self.hives[i]
+      end
    end
    return self
 end
