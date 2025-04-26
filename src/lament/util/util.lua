@@ -19,3 +19,5 @@ local lament = require("lament")
 
 --- Utilities helpful in making LAMENT
 lament.util = {}
+
+return lament.util
