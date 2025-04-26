@@ -18,25 +18,47 @@
 local lament = require("lament")
 require("lament.util.enum")
 require("lament.loader")
-
+local switch, case = require("lament.util.switch")
 lament.executor = {}
 
-lament.executor.CeaseAnd = lament.enum(
+lament.executor.CeaseAnd = assert(lament.enum(
    'halt',
    'load_last',
    'infer_from_effective',
    'infer_from_desired'
-)
+), "BUG: lament.enum returns falsy values")
 
 --- Starts calibration of the system according to the desired state
---- If the desired state is malconfigured, perform the appropriate action,
+--- If the desired state is malconfigured, perform the appropriate resolution,
 --- as defined by the key `cease_and` in the auto-config.
 function lament.executor.start_application()
    -- Obtain cessation behavior
-   local cease_and = lament._sysconf.lament.cease_and
+   local cease_and = lament._sysconf.lament.cease_and or lament.executor.CeaseAnd.load_last
    -- Prepare backends
    lament.boot_backends()
-   -- TODO: finish the implementation of application initialization
+   -- Apply forwards.
+   for i = 1, #lament.backends do
+      if not lament.backends[i].apply() then
+         switch(cease_and) {
+            ---@diagnostic disable: need-check-nil
+            [case(lament.executor.CeaseAnd.halt)] = function ()
+               error(string.format("Backend %s failed", lament.backends[i].name), 2)
+            end,
+            [case(lament.executor.CeaseAnd.infer_from_effective)] = function ()
+               -- TODO: implement inference from effective state
+            end,
+            [case(lament.executor.CeaseAnd.infer_from_desired)] = function ()
+               -- TODO: implement inference from desired state
+            end,
+            [case(lament.executor.CeaseAnd.load_last)] = function ()
+               -- TODO: implement conflict resolution
+            end
+            ---@diagnostic enable: need-check-nil
+         }
+         goto continue
+      end
+       ::continue::
+   end
 end
 
 function lament.executor.start_recalibration()
