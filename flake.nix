@@ -33,13 +33,17 @@
       in
       {
         formatter = pkgs.nixfmt-tree;
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            just
-            luajitPackages.lua
-            luajitPackages.luarocks
-          ];
-        };
+        devShell =
+          with pkgs;
+          mkShell rec {
+            nativeBuildInputs = [ pkg-config ];
+            buildInputs = [
+              just
+              luajitPackages.lua
+              luajitPackages.luarocks
+            ];
+            LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";
+          };
         defaultPackage = pkgs.hello; # TODO replace with actual application.
       }
     );
