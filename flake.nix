@@ -19,15 +19,10 @@
 
     inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     inputs.flake-utils.url = "github:numtide/flake-utils";
-    inputs.flake-utils.inputs.systems.follows = "systems";
-    inputs.asdf.url = "github:asdf-vm/asdf";
+    inputs.flake-utils.inputs.systems.follows = "nixpkgs";
+    # inputs.asdf.url = "github:asdf-vm/asdf";
 
-    imports.luajit = {
-        url = "github:NixOS/nixpkgs/nixos-24.11";
-        inputs = { self, nixpkgs };
-    };
-
-    outputs = { self, nixpkgs, asdf, luajit, ... }:
+    outputs = { self, nixpkgs, flake-utils, ... }:
         flake-utils.lib.eachDefaultSystem (system:
             let
                 pkgs = import nixpkgs { inherit system; };
@@ -35,6 +30,7 @@
                 lua = pkgs.luajit;
                 luarocks = pkgs.luarocks.override { inherit lua ;};
             in {
+                formatter = pkgs.nixfmt-tree;
                 devShells.default = pkgs.mkShell {
                     name = "luajit-dev-env";
 
@@ -51,6 +47,6 @@
                     just build
                     touch $out
                 ''
-            }
+            ;}
         );
 }
