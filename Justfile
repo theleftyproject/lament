@@ -28,7 +28,6 @@ busted := require("busted")
 
 [group("util")]
 setup-env:
-    {{asdf}} install lua 5.1
     {{asdf}} set lua 5.1
     {{asdf}} reshim
     {{luarocks}} install lanes
