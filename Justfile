@@ -18,7 +18,7 @@ set unstable
 CC := require("clang")
 CXX := require("clang++")
 ASDF := require("asdf")
-LUA := require("lua")
+LUA := require("lua5.1")
 LUAROCKS := require("luarocks")
 LUAJIT := which("luajit")
 LUALATEX := which("lualatex")
@@ -27,4 +27,9 @@ DOCKER := which("docker") || require("podman")
 [group('build')]
 [linux]
 build:
-    true
+#   TODO: add nix detection
+    {{LUAROCKS}} build
+
+[windows]
+build:
+    error("lament only supports linux hosts, consider using cross-build")
