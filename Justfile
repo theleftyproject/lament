@@ -15,21 +15,29 @@
 ## along with this program.  If not, see <https://www.gnu.org/licenses/>.
 set unstable
 
-CC := require("clang")
-CXX := require("clang++")
-ASDF := require("asdf")
-LUA := require("lua5.1")
-LUAROCKS := require("luarocks")
-LUAJIT := which("luajit")
-LUALATEX := which("lualatex")
-DOCKER := which("docker") || require("podman")
+_cc := require("clang")
+_cxx := require("clang++")
+asdf := require("asdf")
+lua := require("lua")
+luac := require("luac")
+luarocks := require("luarocks")
+podman := require("podman")
+lualatex := which("lualatex")
+luacheck := require("luacheck")
+busted := require("busted")
 
-[group('build')]
-[linux]
-build:
-#   TODO: add nix detection
-    {{LUAROCKS}} build
+[group("util")]
+setup-env:
+    {{asdf}} set lua 5.1
+    {{asdf}} reshim
+    {{luarocks}} install lanes
+[group("test")]
+lint:
+    {{luarocks}} lint lament-*.rockspec
+    {{luacheck}} src/*
+test:
+    {{busted}} -o TAP
 
-[windows]
-build:
-    error("lament only supports linux hosts, consider using cross-build")
+[group("build")]
+build: setup-env test
+    {{luarocks}} build
