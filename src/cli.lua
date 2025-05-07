@@ -64,11 +64,14 @@ elseif args._command == "set" then
 elseif args._command == "advanced" then
     if args.module and args.setting and args.action and args.value then
         if args.action == "append" then
-            print(string.format("Appending '%s' to setting '%s' of module '%s'.", args.value, args.setting, args.module))
+            print(string.format("Appending '%s' to setting '%s' of module '%s'.",
+            args.value, args.setting, args.module))
         elseif args.action == "remove" then
-            print(string.format("Removing '%s' from setting '%s' of module '%s'.", args.value, args.setting, args.module))
+            print(string.format("Removing '%s' from setting '%s' of module '%s'.",
+            args.value, args.setting, args.module))
         elseif args.action == "set" then
-            print(string.format("Setting '%s' of module '%s' to '%s'.", args.setting, args.module, args.value))
+            print(string.format("Setting '%s' of module '%s' to '%s'.",
+            args.setting, args.module, args.value))
         else
             print("Unknown action. Use 'append', 'remove', or 'set'.")
             print_help()
