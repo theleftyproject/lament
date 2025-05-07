@@ -120,11 +120,11 @@ local sandbox = {
  function sandbox.protect(code, options)
    options = options or {}
 
-   local quota = false
+   local quota = 0
    if options.quota and not quota_supported then
      error("options.quota is not supported on this environment (usually LuaJIT). Please unset options.quota")
    end
-   if options.quota ~= false then
+   if options.quota ~= 0 then
      quota = options.quota or 500000
    end
 
