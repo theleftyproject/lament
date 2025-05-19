@@ -26,3 +26,4 @@ for i in $LEFTY_ESCALATORS; do
     fi
 done
 
+exec $LEFTY_ESCAL_PICK ${@}
