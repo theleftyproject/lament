@@ -23,10 +23,9 @@ build = {
       ["lament.loader"] = "src/lament/loader.lua",
       ["lament.backend"] = "src/lament/backend.lua",
       ["lament.executor"] = "src/lament/executor.lua",
-      ["lament.sandbox"] = "src/sandbox.lua",
+      ["lament.sandbox"] = "src/lament/sandbox.lua",
       ["lament.util"] = "src/lament/util/util.lua",
       ["lament.util.enum"] = "src/lament/util/enum.lua",
-      ["lament.util.switch"] = "src/lament/util/switch.lua",
-      ["cli"] = "src/bin/cli.lua"
+      ["lament.util.switch"] = "src/lament/util/switch.lua"
    }
 }
