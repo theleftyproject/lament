@@ -16,12 +16,9 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require('lament')
-
+local pl = require('pl')
 --- A key in a [Hive]
-lament.Key = {
-   name = "",
-   value = {},
-}
+lament.Key = pl.class()
 
 --- Creates a new instance of a `Key`
 --- @param name string The name of the key
