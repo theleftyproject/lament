@@ -16,6 +16,7 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require("lament")
+local pl = require("jit.profile")
 require("lament.util.enum")
 require("lament.loader")
 local switch, case = require("lament.util.switch")

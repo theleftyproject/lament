@@ -16,19 +16,16 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require('lament')
-
+local pl = require('pl')
 --- Defines a configuration hive.
-lament.Hive = {}
+lament.Hive = pl.class()
 
 --- Creates a new instance of a hive.
 ---@param name string The name of the hive.
 ---@param default_keys table The default values of the key sets
----@return table Hive the newly created hive.
-function lament.Hive.new(name, default_keys)
-   return setmetatable({
-      name = name,
-      keys = default_keys
-   }, {__index = lament.Hive})
+function lament.Hive:_init(name, default_keys)
+      self.name = name
+      self.keys = default_keys
 end
 
 --- Reads a hive key.
@@ -36,8 +33,8 @@ end
 --- @return table? Key the key that was read
 function lament.Hive:get_key(key)
    -- if the key exists, return its value
-   if self[key] then
-      return self[key]
+   if self.keys[key] then
+      return self.keys[key]
    end
 
    -- else return null
@@ -49,6 +46,6 @@ end
 --- @param value table The value of the config key.
 --- @return table Hive This configuration hive.
 function lament.Hive:set_key(key, value)
-   self[key] = value
+   self.keys[key].value = value
    return self
 end
