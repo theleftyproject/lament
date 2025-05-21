@@ -11,9 +11,9 @@ dependencies = {
    "lua == 5.1",
    "lpeg == 1.1.0-2",
    "luafilesystem == 1.8.0-1",
-=======
->>>>>>> 16848bd (add penlight and modules)
    "penlight == 1.14.0-3"
+   "penlight == 1.14.0-3",
+   "argparse == 0.7.1-1"
 }
 build = {
    type = "builtin",
