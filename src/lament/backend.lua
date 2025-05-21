@@ -16,39 +16,29 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require('lament')
+local pl = require('pl')
 local lament_hive = require('lament.hive')
 local lpeg = require('lpeg')
 local lfs = require('lfs')
 
---- defines a LAMENT backend
-lament.backend.Backend = {}
+-- Base class from which the backends derive
+lament.backend.Backend = pl.class()
 
 --- creates a new LAMENT backend
----
---- @param name string The name for the backend
---- @return table lament.backend.Backend the newly created backend
-function lament.backend.Backend.new(name)
-   return setmetatable({
+--- @param name string The name for the backends
+function lament.backend.Backend:_init(name)
       --- The name for the backend
-      name = name,
+      self.name = name
       --- Whether the backend is active or not
-      active = false,
+      self.active = false
       --- The hives registered by the backend
-      hives = {},
+      self.hives = {}
       --- The files demanded by the backend
-      files = {},
+      self.files = {}
       --- The capabilities of the backend
       -- TODO: add permissions to backends, like accessing
       -- systemd commands or just editing files
-      capabilities = {},
-      ---defines the behaviour of the bakckend on initialization.
-      ---@param backend table the backend being initialized
-      ---@param hives table the hives the backend will register
-      ---@param files table the files the backend will access
-      ---@return boolean success whether activation was successful or not.
-      on_init = function (backend, hives, files) return true end,
-      on_exit = function (backend, hives, files) return true end,
-   }, {__index = lament.backend.Backend})
+      self.capabilities = {}
 end
 
 --- Initializes the backend
