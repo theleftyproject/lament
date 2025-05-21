@@ -20,6 +20,7 @@ local pl = require("jit.profile")
 require("lament.util.enum")
 require("lament.loader")
 local switch, case = require("lament.util.switch")
+local case = assert(case, "BUG: lament.util.switch.case is nil")
 lament.executor = {}
 
 lament.executor.CeaseAnd = assert(lament.enum(
@@ -41,7 +42,6 @@ function lament.executor.start_application()
    for i = 1, #lament.backends do
       if not lament.backends[i].apply() then
          switch(cease_and) {
-            ---@diagnostic disable: need-check-nil
             [case(lament.executor.CeaseAnd.halt)] = function ()
                error(string.format("Backend %s failed", lament.backends[i].name), 2)
             end,
@@ -54,7 +54,6 @@ function lament.executor.start_application()
             [case(lament.executor.CeaseAnd.load_last)] = function ()
                -- TODO: implement conflict resolution
             end
-            ---@diagnostic enable: need-check-nil
          }
          goto continue
       end
