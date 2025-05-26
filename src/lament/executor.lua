@@ -42,22 +42,22 @@ function lament.executor.start_application()
    for i = 1, #lament.backends do
       if not lament.backends[i].apply() then
          switch(cease_and) {
-            [case(lament.executor.CeaseAnd.halt)] = function ()
+            [case(lament.executor.CeaseAnd.halt)] = function()
                error(string.format("Backend %s failed", lament.backends[i].name), 2)
             end,
-            [case(lament.executor.CeaseAnd.infer_from_effective)] = function ()
+            [case(lament.executor.CeaseAnd.infer_from_effective)] = function()
                -- TODO: implement inference from effective state
             end,
-            [case(lament.executor.CeaseAnd.infer_from_desired)] = function ()
+            [case(lament.executor.CeaseAnd.infer_from_desired)] = function()
                -- TODO: implement inference from desired state
             end,
-            [case(lament.executor.CeaseAnd.load_last)] = function ()
+            [case(lament.executor.CeaseAnd.load_last)] = function()
                -- TODO: implement conflict resolution
             end
          }
          goto continue
       end
-       ::continue::
+      ::continue::
    end
 end
 
