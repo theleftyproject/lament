@@ -27,18 +27,18 @@ lament.backend.Backend = pl.class()
 --- creates a new LAMENT backend
 --- @param name string The name for the backends
 function lament.backend.Backend:_init(name)
-      --- The name for the backend
-      self.name = name
-      --- Whether the backend is active or not
-      self.active = false
-      --- The hives registered by the backend
-      self.hives = {}
-      --- The files demanded by the backend
-      self.files = {}
-      --- The capabilities of the backend
-      -- TODO: add permissions to backends, like accessing
-      -- systemd commands or just editing files
-      self.capabilities = {}
+   --- The name for the backend
+   self.name = name
+   --- Whether the backend is active or not
+   self.active = false
+   --- The hives registered by the backend
+   self.hives = {}
+   --- The files demanded by the backend
+   self.files = {}
+   --- The capabilities of the backend
+   -- TODO: add permissions to backends, like accessing
+   -- systemd commands or just editing files
+   self.capabilities = {}
 end
 
 --- Initializes the backend

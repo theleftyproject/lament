@@ -24,17 +24,17 @@ lament.Hive = pl.class()
 ---@param name string The name of the hive.
 ---@param default_keys table The default values of the key sets
 function lament.Hive:_init(name, default_keys)
-      self.name = name
-      self.keys = default_keys
-      self._proxy = {}
-      setmetatable(self._proxy, {
-         __index = function (_, key)
-            return self:get_key(key)
-         end,
-         __newindex = function (_, key, value)
-            self:set_key(key, value)
-         end
-      })
+   self.name = name
+   self.keys = default_keys
+   self._proxy = {}
+   setmetatable(self._proxy, {
+      __index = function(_, key)
+         return self:get_key(key)
+      end,
+      __newindex = function(_, key, value)
+         self:set_key(key, value)
+      end
+   })
 end
 
 --- Reads a hive key.

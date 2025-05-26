@@ -8,7 +8,7 @@ description = {
    license = "MIT"
 }
 dependencies = {
-   "lua >= 5.1",
+   "lua == 5.1",
    "lpeg == 1.1.0-2",
    "luafilesystem == 1.8.0-1",
    "penlight == 1.14.0-3",
