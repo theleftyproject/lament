@@ -24,7 +24,8 @@ Free and open source software development is a collaborative job. Various people
 
 ## Commits (for project administrators)
 - **VERY IMPORTANT:** The only commits on the `main` branch should be created by merges, unless some sort of apocalypse happens.
+- **REPEATING:** FOR THE SAKE OF CHRONOS YOU **DO NOT** COMMIT TO `main` UNLESS YOU MERGE STUFF OR UNLESS CHRONOS WANTS YOU TO DO SO.
 - **Always create branches** for your commits and make a **pull request** to the `main` branch.
 
 ## Final notes
-- Do not be afraid to ask whenever you need help. We have both [GitHub Discussions](https://github.com/Sparkles-Laurel/lament/discussions/10) and a [Matrix room](https://matrix.to/#/#lament-contrib:platypus-sandbox.com)
+- Do not be afraid to ask whenever you need help. We have [GitHub Discussions](https://github.com/Sparkles-Laurel/lament/discussions/10)
