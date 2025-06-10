@@ -35,6 +35,8 @@ function lament.Hive:_init(name, default_keys)
          self:set_key(key, value)
       end
    })
+
+   setmetatable(self, self._proxy)
 end
 
 --- Reads a hive key.

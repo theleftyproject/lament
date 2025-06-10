@@ -17,10 +17,13 @@
 
 local lament = require("lament")
 local pl = require("pl")
+
 require("lament.util.enum")
 require("lament.loader")
-local switch, case = require("lament.util.switch")
-local case = assert(case, "BUG: lament.util.switch.case is nil")
+require("lament.hooks")
+
+local switch, case = assert(require("lament.util.switch"))
+
 lament.executor = {}
 
 lament.executor.CeaseAnd = assert(lament.enum(
@@ -73,17 +76,17 @@ function lament.executor.start_recalibration()
    for i = 1, #lament.backends do
       if not lament.backends[i].recalibrate() then
          switch(cease_and) {
-            [case(lament.executor.CeaseAnd.halt)] = function ()
+            [case(lament.executor.CeaseAnd.halt())] = function ()
                error(string.format("Backend %s failed to recalibrate", lament.backends[i].name), 2)
             end,
-            [case(lament.executor.CeaseAnd.infer_from_effective)] = function ()
-               -- TODO: implement inference from effective state
+            [case(lament.executor.CeaseAnd.infer_from_effective())] = function ()
+               infer_etc_hook()
             end,
-            [case(lament.executor.CeaseAnd.infer_from_desired)] = function ()
-               -- TODO: implement inference from desired state
+            [case(lament.executor.CeaseAnd.infer_from_desired())] = function ()
+               infer_decl_hook()
             end,
-            [case(lament.executor.CeaseAnd.load_last)] = function ()
-               -- TODO: implement conflict resolution
+            [case(lament.executor.CeaseAnd.load_last())] = function ()
+               load_last_hook()
             end
          }
       end
