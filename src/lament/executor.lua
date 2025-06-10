@@ -45,17 +45,17 @@ function lament.executor.start_application()
    for i = 1, #lament.backends do
       if not lament.backends[i].apply() then
          switch(cease_and) {
-            [case(lament.executor.CeaseAnd.halt)] = function()
-               error(string.format("Backend %s failed to apply", lament.backends[i].name), 2)
+            [case(lament.executor.CeaseAnd.halt())] = function ()
+               error(string.format("Backend %s failed to recalibrate", lament.backends[i].name), 2)
             end,
-            [case(lament.executor.CeaseAnd.infer_from_effective)] = function()
-               -- TODO: implement inference from effective state
+            [case(lament.executor.CeaseAnd.infer_from_effective())] = function ()
+               lament.hooks.infer_etc_hook()
             end,
-            [case(lament.executor.CeaseAnd.infer_from_desired)] = function()
-               -- TODO: implement inference from desired state
+            [case(lament.executor.CeaseAnd.infer_from_desired())] = function ()
+               lament.hooks.infer_decl_hook()
             end,
-            [case(lament.executor.CeaseAnd.load_last)] = function()
-               -- TODO: implement conflict resolution
+            [case(lament.executor.CeaseAnd.load_last())] = function ()
+               lament.hooks.load_last_hook()
             end
          }
          goto continue
@@ -80,13 +80,13 @@ function lament.executor.start_recalibration()
                error(string.format("Backend %s failed to recalibrate", lament.backends[i].name), 2)
             end,
             [case(lament.executor.CeaseAnd.infer_from_effective())] = function ()
-               infer_etc_hook()
+               lament.hooks.infer_etc_hook()
             end,
             [case(lament.executor.CeaseAnd.infer_from_desired())] = function ()
-               infer_decl_hook()
+               lament.hooks.infer_decl_hook()
             end,
             [case(lament.executor.CeaseAnd.load_last())] = function ()
-               load_last_hook()
+               lament.hooks.load_last_hook()
             end
          }
       end
