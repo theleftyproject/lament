@@ -15,6 +15,9 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+local lament = require("lament")
+lament.hooks = {}
+
 -- Infers state from the effective state (also referred to as the state of et-cetra in configuration theory)
 local function infer_etc_hook()
 
@@ -32,3 +35,12 @@ end
 -- Loads the last effective configuration state
 local function load_last_hook()
 end
+
+
+-- export local functions
+lament.hooks.infer_etc_hook = infer_etc_hook
+lament.hooks.infer_decl_hook = infer_decl_hook
+lament.hooks.cross_infer_hook = cross_infer_hook
+lament.hooks.load_last_hook = load_last_hook
+
+return lament.hooks
