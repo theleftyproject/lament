@@ -18,9 +18,11 @@
 -- TODO: fix this shit
 
 local argparse = require("argparse")
+local pretty = require("pl.pretty")
 
 local function print_help()
    print("lament - Alters or reads configuration files based on instructions.")
+   print("See lament(8) for more information")
    print("Usage:")
    print("  lament <key> <action> [options]")
    print("  lament --apply [options]")
@@ -74,16 +76,65 @@ local parser = argparse() {
    epilog = "See lament(8) for more info."
 }
 
-parser:mutex(
-   parser:argument("key", "Key for configuration elements")
-   :args("?"),
-   parser:argument("action", "What should be done with the key")
-   :choices({ "get", "set" })
-)
-parser:mutex(
-   parser:flag("-A --apply"),
-   parser:flag("-B --recalibrate"),
-   parser:flag("-C --cross-calibrate")
+local global_flags = parser:mutex(
+   parser:flag("-A --apply", "Forwards apply the changes to the system's configuration"),
+   parser:flag("-B --recalibrate", "Backwards apply the changes in configuration to LAMENT's own configuration"),
+   parser:flag("-C --cross-calibrate",
+      "[VERY EXPERIMENTAL] Perform application or recalibration based on which side is newer")
 )
 
-local args = parser:parse()
+-- Positional args - optional here, will check after parsing
+parser:argument("key", "Key for configuration elements"):args("?")
+parser:argument("action", "Action to perform: get or set"):args("?"):choices({ "get", "set" })
+
+local args, err = parser:parse(arg)
+if err then
+   print(err)
+   os.exit(1)
+end
+
+local global_flag_count = 0
+if args.apply then global_flag_count = global_flag_count + 1 end
+if args.recalibrate then global_flag_count = global_flag_count + 1 end
+if args.cross_calibrate then global_flag_count = global_flag_count + 1 end
+
+local has_key_and_action = args.key ~= nil and args.action ~= nil
+
+-- Enforce exclusivity and presence rules:
+if global_flag_count == 1 and not has_key_and_action then
+   -- OK, user chose exactly one global flag, no key/action - good
+elseif global_flag_count == 0 and has_key_and_action then
+   -- OK, user provided key and action without global flags - good
+else
+   -- Any other combination is invalid
+   print("Error: you must specify exactly one of the global flags (-A, -B, or -C) OR both <key> and <action>.")
+   print(parser:get_usage())
+   os.exit(1)
+end
+
+-- Now handle the logic depending on the input mode:
+
+if global_flag_count == 1 then
+   -- handle the global flag mode
+   if args.apply then
+      print("Handling --apply")
+   elseif args.recalibrate then
+      print("Handling --recalibrate")
+   elseif args.cross_calibrate then
+      print("Handling --cross-calibrate")
+   end
+elseif has_key_and_action then
+   -- handle <key> <action> commands
+
+   print("key:", args.key)
+   print("action:", args.action)
+
+
+   if args.action == "set" then
+
+   elseif args.action == "get" then
+
+   else
+      print_help()
+   end
+end
