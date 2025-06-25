@@ -1,4 +1,4 @@
--- cli.lua - The LAMENT command-line tool
+-- bin/cli.lua - The LAMENT command-line tool
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
@@ -19,6 +19,7 @@
 
 local argparse = require("argparse")
 local pretty = require("pl.pretty")
+local util = require("./util")
 
 local function print_help()
    print("lament - Alters or reads configuration files based on instructions.")
@@ -89,7 +90,7 @@ parser:argument("action", "Action to perform: get or set"):args("?"):choices({ "
 
 local args, err = parser:parse(arg)
 if err then
-   print(err)
+   io.stderr:write(pretty(err))
    os.exit(1)
 end
 
@@ -107,8 +108,9 @@ elseif global_flag_count == 0 and has_key_and_action then
    -- OK, user provided key and action without global flags - good
 else
    -- Any other combination is invalid
-   print("Error: you must specify exactly one of the global flags (-A, -B, or -C) OR both <key> and <action>.")
-   print(parser:get_usage())
+   io.stderr:write(
+   "Error: you must specify exactly one of the global flags (-A, -B, or -C) OR both <key> and <action>.\n\r")
+   io.stderr:write(parser:get_usage())
    os.exit(1)
 end
 
@@ -117,11 +119,11 @@ end
 if global_flag_count == 1 then
    -- handle the global flag mode
    if args.apply then
-      print("Handling --apply")
+      print("Forwards application invoked")
    elseif args.recalibrate then
-      print("Handling --recalibrate")
+      print("Recalibration invoked.")
    elseif args.cross_calibrate then
-      print("Handling --cross-calibrate")
+      print("Cross calibration invoked.")
    end
 elseif has_key_and_action then
    -- handle <key> <action> commands
@@ -129,12 +131,45 @@ elseif has_key_and_action then
    print("key:", args.key)
    print("action:", args.action)
 
+   -- verify key syntax
+   if not util.verify_key_syntax(args.key) then
+      io.stderr:write(string.format("Syntax for key \"%s\" is invalid", args.key))
+      os.exit(1)
+   end
 
    if args.action == "set" then
+      -- create key setting parser
+      local set_parser = argparse("set", "Options for lament <key> set")
+      set_parser:argument("value", "Value to set"):args("?")
+      set_parser:flag("--clear, -c", "Clear the value for optional keys")
+      set_parser:option("-a --append", "Append <value> to the list"):args(1)
+      set_parser:option("-p --prepend", "Prepend <value> to the list"):args(1)
+      set_parser:option("-s --set-index", "Set a list index to <value>"):args(2)
+      set_parser:option("-n --nil-index", "Set a list index to nil"):args(1)
+      set_parser:option("-d --del-index", "Delete the list index"):args(1)
 
+      local set_args, err = set_parser:parse(arg, 3)
+      if err then
+         io.stderr:write("Error parsing set options:", assert(pretty.write(err)))
+         os.exit(1)
+      end
+
+      print(pretty.write(set_args))
    elseif args.action == "get" then
+      local get_parser = argparse("get", "Options for lament <key> get")
+      get_parser:option("-i --index --at", "Get the value at the specified index"):args(1)
 
+      local get_args, err = get_parser:parse(arg, 3)
+      if err then
+         print("Error parsing get options:", err)
+         os.exit(1)
+      end
+
+      print("Get options:")
+      for k, v in pairs(get_args) do
+         print(" ", k, v)
+      end
    else
-      print_help()
+      parser:get_usage()
    end
 end
