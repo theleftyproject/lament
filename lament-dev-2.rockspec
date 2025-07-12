@@ -30,5 +30,8 @@ build = {
    },
    copy_directories = {
       "docs"
+   },
+   bin = {
+      ["lament"] = "src/cli/lament"
    }
 }

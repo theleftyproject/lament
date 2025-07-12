@@ -28,6 +28,8 @@ busted := require("busted")
 # for documentation
 lualatex := which("lualatex")
 
+# to hook up lament itself
+lament := "src/cli/lament"
 
 [group("util")]
 setup-env:
@@ -37,11 +39,18 @@ setup-env:
 lint:
     {{luarocks}} lint lament-*.rockspec
     {{luacheck}} src/*
-test:
-    {{busted}} -o TAP
+test FORMAT="utfTerminal":
+    {{busted}} -v -o {{FORMAT}}
 
 [group("build")]
 build: setup-env test
     {{luarocks}} build
 doc-build:
     {{lualatex}} docs/README.tex
+clean:
+    {{luarocks}} remove --force lament || true
+    rm -f *.rock *.rockspec~
+
+[group("exec")]
+run *args:
+    {{lament}} {{args}}
