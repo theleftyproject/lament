@@ -39,7 +39,7 @@ setup-env:
 lint:
     {{luarocks}} lint lament-*.rockspec
     {{luacheck}} src/*
-test FORMAT="utfTerminal":
+test FORMAT="utfTerminal": lint
     {{busted}} -v -o {{FORMAT}}
 
 [group("build")]
