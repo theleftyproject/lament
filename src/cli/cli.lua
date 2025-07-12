@@ -19,28 +19,49 @@
 local argparse = require("argparse")
 
 local function main(args)
-  local parser = argparse("lament", "Alters or reads configuration files based on instructions.")
+  local parser = argparse("lament",
+         "Alters or reads configuration files based on instructions.")
 
   -- Global flags
-  parser:flag("--apply -A", "Forwards apply the changes to the system's configuration")
-  parser:flag("--recalibrate -B", "Backwards apply the changes in configuration to LAMENT's own configuration")
-  parser:flag("--cross-calibrate -C", "[VERY EXPERIMENTAL] Perform application or recalibration based on which side is newer")
+  parser:flag("--apply -A",
+      "Forwards apply the changes to the system's configuration")
+  parser:flag("--recalibrate -B",
+      "Backwards apply the changes in configuration to LAMENT's own configuration")
+  parser:flag("--cross-calibrate -C",
+      "[VERY EXPERIMENTAL] Perform application or recalibration based on which side is newer")
   parser:flag("--help -h", "Show help")
 
   -- Positional arguments for <key> and <action>
-  parser:argument("key"):args("?"):description("Key for configuration elements.")
-  parser:argument("action"):args("?"):description("Either get or set, what to do with the key")
+  parser:argument("key")
+        :args("?")
+        :description("Key for configuration elements.")
+  parser:argument("action")
+        :args("?")
+        :description("Either get or set, what to do with the key")
 
   -- Options for 'set'
-  parser:option("--append -a"):args(1):description("Only used for list keys. Add a value to the end of the list on the key")
-  parser:option("--prepend -p"):args(1):description("Only used for list keys. Add a value to the beginning of the list on the key")
-  parser:option("--set-index -s"):args(2):description("Only used for list keys. Amend a single index of the keys")
-  parser:option("--nil-index -n"):args(1):description("Only used for list keys. Set the value of <index> to nil")
-  parser:option("--del-index -d"):args(1):description("Only used for list keys. Delete the index from the sequence")
-  parser:flag("--clear", "Clear the value of optional keys. Will error if used with compulsory keys")
+  parser:option("--append -a")
+         :args(1)
+         :description("Only used for list keys. Add a value to the end of the list on the key")
+  parser:option("--prepend -p")
+         :args(1)
+         :description("Only used for list keys. Add a value to the beginning of the list on the key")
+  parser:option("--set-index -s")
+         :args(2)
+         :description("Only used for list keys. Amend a single index of the keys")
+  parser:option("--nil-index -n")
+         :args(1)
+         :description("Only used for list keys. Set the value of <index> to nil")
+  parser:option("--del-index -d")
+         :args(1)
+         :description("Only used for list keys. Delete the index from the sequence")
+  parser:flag("--clear",
+         "Clear the value of optional keys. Will error if used with compulsory keys")
 
   -- Option for 'get'
-  parser:option("--index --at -i"):args(1):description("Only used for list keys. Get the value on the specified index")
+  parser:option("--index --at -i")
+        :args(1)
+        :description("Only used for list keys. Get the value on the specified index")
 
   local parsed = parser:parse(args)
 
