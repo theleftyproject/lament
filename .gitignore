@@ -8,3 +8,4 @@
 /docs/*.synctex.gz
 /docs/*.fdb_latexmk
 /docs/*.log
+/docs/out/

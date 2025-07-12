@@ -1,4 +1,4 @@
--- basic.lua - basic test that demonstrates whether the implementation of busted that is present is bugged
+-- check_busted.lua - basic test that demonstrates whether the implementation of busted that is present is bugged
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
