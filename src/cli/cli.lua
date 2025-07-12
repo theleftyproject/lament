@@ -1,4 +1,4 @@
--- key.lua - hive configuration keys
+-- cli.lua - the command line interface
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
@@ -15,18 +15,12 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require('lament')
-local pl = require('pl')
---- A key in a [Hive]
-lament.Key = pl.class()
-
---- Creates a new instance of a `Key`
---- @param name string The name of the key
---- @param default_value any Default value for the keys
---- @return table The metatable for the new `Key` instance
-lament.Key.new = function(name, default_value)
-   return setmetatable({
-      name = name,
-      value = default_value,
-   }, {__index = lament.Key})
+local function main(args)
+   for i = 1, #args do
+      print(args[i])
+   end
 end
+
+return {
+   main = main
+}

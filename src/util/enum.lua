@@ -1,4 +1,4 @@
--- util.lua - utilities
+-- enum.lua - provides discriminated unions
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
@@ -14,10 +14,9 @@
 --
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-local lament = require('lament')
 
 --- Enums and discriminated unions
-lament.util.enum = {}
+local enum = {}
 
 local function inner(key)
    return function(data)
@@ -40,7 +39,7 @@ end
 ---Instantiates a new [lament.util.enum.Enum]
 ---@param ... unknown List of keys in the enum
 ---@return table Enum The enum table
-function lament.util.enum.Enum(...)
+function enum.Enum(...)
    local tbl = {}
 
    for i = 1, select('#', ...) do
@@ -51,5 +50,8 @@ function lament.util.enum.Enum(...)
 
    return tbl
 end
+function enum.is_variant(value, variant)
+  return type(value) == "table" and value.key == variant
+end
 
-return lament.util.enum
+return enum

@@ -1,33 +1,36 @@
 package = "lament"
-version = "dev-1"
+version = "dev-2"
 source = {
-   url = "git+ssh://git@github.com/Sparkles-Laurel/lament.git"
+   url = "git+https://github.com/Sparkles-Laurel/lament.git"
 }
 description = {
+   detailed = "**L**efty **A**pplication, **M**odification, **E**diting and **N**otification **T**ool",
    homepage = "https://github.com/Sparkles-Laurel/lament",
-   license = "MIT"
+   license = "GPLv3"
 }
 dependencies = {
-   "lua == 5.1",
-   "lpeg == 1.1.0-2",
-   "luafilesystem == 1.8.0-1",
-   "penlight == 1.14.0-3"
-   "penlight == 1.14.0-3",
-   "argparse == 0.7.1-1"
+   "penlight",
+   "luafilesystem",
+   "lpeg",
+   "argparse",
+   "lanes"
+}
+build_dependencies = {
+   queries = {}
 }
 build = {
    type = "builtin",
    modules = {
-      lament = "src/lament.lua",
-      ["lament.hive"] = "src/lament/hive.lua",
-      ["lament.key"] = "src/lament/key.lua",
-      ["lament.loader"] = "src/lament/loader.lua",
-      ["lament.backend"] = "src/lament/backend.lua",
-      ["lament.executor"] = "src/lament/executor.lua",
-      ["lament.sandbox"] = "src/sandbox.lua",
+      ["lament"] = "src/lament.lua",
       ["lament.util"] = "src/lament/util/util.lua",
       ["lament.util.enum"] = "src/lament/util/enum.lua",
       ["lament.util.switch"] = "src/lament/util/switch.lua",
-      ["cli"] = "src/bin/cli.lua"
+      ["lament.cli"] = "src/lament/cli.lua"
+   },
+   copy_directories = {
+      "docs"
    }
+}
+test_dependencies = {
+   queries = {}
 }

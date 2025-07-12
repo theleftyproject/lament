@@ -7,7 +7,6 @@ Free and open source software development is a collaborative job. Various people
 - Abide by the [Code of Conduct](CODE_OF_CONDUCT.md). We are very strict about this one. We will not tolerate harassment of any contributors here.
 ## Toolchain
 - LAMENT is written in [Lua](https://lua.org), supports [LuaJIT](https://luajit.org/) and is built using [Luarocks](https://luarocks.org)
-- We use [`asdf`](https://asdf-vm.com) to manage the versions of Lua and LuaJIT
 - For documentation, we both use Lua's internal triple-dash (`---`) documentation syntax, and also LaTeX with the AMS-TeX package.
   - The LaTeX processor we prefer is LuaLaTeX, but you can use an alternative processor if you need
 - The `.envrc` file in the repository root configures your development environment using [`direnv`](https://direnv.net/)

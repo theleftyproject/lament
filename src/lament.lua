@@ -1,6 +1,6 @@
--- lament.lua - provides the global system configuration of LAMENT
+-- lament.lua - major source file for lament
 --
---     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
+--     Copyright (C) 2025  Kıvılcım Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,26 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-local lament = require('lament')
-local conf = {}
-
-conf.lament = {
-   --- Global system state
-   _sysconf = {
-      --- Self-configuration of LAMENT
-      ["lament"] = {
-         --- Behaviour of LAMENT in case application fails
-         cease_and = lament.executor.CeaseAnd.halt
-      }
-   }
-}
-
--- The global configuration table is a special table. It needs to override the
-
-require('lament.hive')
-require('lament.key')
-require('lament.loader')
-
+--- Root workspace for LAMENT
+local lament = {}
 
 return lament

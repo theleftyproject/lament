@@ -16,9 +16,9 @@
 set unstable
 
 # for compiling Lua
-lua := require("luajit") || require("lua")
+lua := require("luajit") || require("./lua")
 luac := require("luac")
-luarocks := require("luarocks")
+luarocks := require("./luarocks")
 luacheck := require("luacheck")
 
 # for testing environment

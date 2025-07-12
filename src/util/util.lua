@@ -1,4 +1,4 @@
--- bin/util.lua - Utilities for the LAMENT CLI
+-- util.lua - utility functions
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
@@ -14,21 +14,6 @@
 --
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+local util = {}
 
-local bin = {}
-bin.util = {}
-
-
----Verifies the syntax of a key
----@param key string The key to verify the syntax of
-local function verify_key_syntax(key)
-   local segments = {}
-   for subkey in key:match("^([a-zA-Z_][a-zA-Z0-9_]*)(%.[a-zA-Z_][a-zA-Z0-9_]*)*$") do
-      table.insert(segments, subkey)
-   end
-   return next(segments) and segments or nil
-end
-
-bin.util.verify_key_syntax = verify_key_syntax
-
-return bin.util
+return util
