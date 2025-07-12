@@ -1,6 +1,6 @@
--- lament.lua - major source file for lament
+-- src/hive/key.lua - configuration keys
 --
---     Copyright (C) 2025  Kıvılcım Defne Öztürk
+--     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,11 +15,23 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
---- Root workspace for LAMENT
-local lament = {
-   cli = require("lament.cli"),
-   hive = require("lament.hive"),
-   key = require("lament.hive.key")
-}
+local class = require("pl.class")
 
-return lament
+local Key = class()
+
+function Key:_init(name, opts)
+  self.name = name
+  self.default = opts.default
+  self.validate = opts.validate or function(_) return true end
+end
+
+function Key:get(hive)
+  return rawget(hive._values, self.name) or self.default
+end
+
+function Key:set(hive, value)
+  assert(self.validate(value), "Validation failed for key: " .. self.name)
+  hive._values[self.name] = value
+end
+
+return { Key = Key }

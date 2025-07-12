@@ -1,6 +1,6 @@
--- lament.lua - major source file for lament
+-- src/interface/registry.lua - the config registry
 --
---     Copyright (C) 2025  Kıvılcım Defne Öztürk
+--     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,11 +15,20 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
---- Root workspace for LAMENT
-local lament = {
-   cli = require("lament.cli"),
-   hive = require("lament.hive"),
-   key = require("lament.hive.key")
-}
+local class = require("pl.class")
 
-return lament
+local Registry = class()
+
+function Registry:_init()
+  self.hives = {}
+end
+
+function Registry:register_hive(name, hive)
+  self.hives[name] = hive
+end
+
+function Registry:get_hive(name)
+  return self.hives[name]
+end
+
+return Registry

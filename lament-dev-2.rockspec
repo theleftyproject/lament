@@ -15,22 +15,20 @@ dependencies = {
    "argparse",
    "lanes"
 }
-build_dependencies = {
-   queries = {}
-}
 build = {
    type = "builtin",
    modules = {
       ["lament"] = "src/lament.lua",
-      ["lament.util"] = "src/lament/util/util.lua",
-      ["lament.util.enum"] = "src/lament/util/enum.lua",
-      ["lament.util.switch"] = "src/lament/util/switch.lua",
-      ["lament.cli"] = "src/lament/cli.lua"
+      ["lament.util"] = "src/util/util.lua",
+      ["lament.util.enum"] = "src/util/enum.lua",
+      ["lament.util.switch"] = "src/util/switch.lua",
+      ["lament.cli"] = "src/cli/cli.lua",
+      ["lament.hive"] = "src/hive/hive.lua",
+      ["lament.hive.key"] = "src/hive/key.lua",
+      ["lament.interface.backend"] = "src/interface/backend.lua",
+      ["lament.interface.registry"] = "src/interface/registry.lua"
    },
    copy_directories = {
       "docs"
    }
-}
-test_dependencies = {
-   queries = {}
 }
