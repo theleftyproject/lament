@@ -1,0 +1,46 @@
+-- backend.lua - backends for configuration
+--
+--     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
+--
+-- This program is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+--
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+--
+-- You should have received a copy of the GNU General Public License
+-- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+local class = require("pl.class")
+
+local Backend = class()
+
+function Backend:_init()
+   --- Name of the backend
+   self.name = "backend"
+   --- Hives the backend registers
+   self.hives = {}
+   --- Files the backend accesses
+   self.open_files = {}
+end
+
+function Backend:init()
+
+end
+
+function Backend:quit()
+end
+
+function Backend:apply()
+end
+
+function Backend:recalibrate()
+end
+
+return {
+   Backend = Backend,
+   class = class
+}
