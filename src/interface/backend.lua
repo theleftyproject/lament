@@ -1,4 +1,4 @@
--- util.lua - utilities
+-- src/interface/backend.lua - backends for configuration
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 --
@@ -15,9 +15,41 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require("lament")
+local class = require("pl.class")
 
---- Utilities helpful in making LAMENT
-lament.util = {}
+local Backend = class()
 
-return lament.util
+function Backend:_init()
+   --- Name of the backend
+   self.name = "backend"
+   --- Hives the backend registers
+   self.hives = {}
+   --- Files the backend accesses
+   self.open_files = {}
+   self.active = false
+end
+
+function Backend:init()
+   self.active = true
+end
+
+function Backend:quit()
+   self.active = false
+end
+
+function Backend:apply()
+   if not self.active then
+      return
+   end
+end
+
+function Backend:recalibrate()
+   if not self.active then
+      return
+   end
+end
+
+return {
+   Backend = Backend,
+   class = class
+}
