@@ -19,7 +19,7 @@
 
 local argparse = require("argparse")
 local pretty = require("pl.pretty")
-local util = require("./util")
+local util = require("util")
 
 local function print_help()
    print("lament - Alters or reads configuration files based on instructions.")
