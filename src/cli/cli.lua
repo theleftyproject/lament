@@ -96,17 +96,13 @@ local function main(args)
       end
       if parsed.append then
          print("[DUMMY] Appending:", parsed.append)
-      end
-      if parsed.prepend then
+      elseif parsed.prepend then
          print("[DUMMY] Prepending:", parsed.prepend)
-      end
-      if parsed.set_index then
+      elseif parsed.set_index then
          print("[DUMMY] Setting index:", parsed.set_index[1], "to", parsed.set_index[2])
-      end
-      if parsed.nil_index then
+      elseif parsed.nil_index then
          print("[DUMMY] Setting index:", parsed.nil_index, "to nil")
-      end
-      if parsed.del_index then
+      elseif parsed.del_index then
          print("[DUMMY] Deleting index:", parsed.del_index)
       end
       return 0
