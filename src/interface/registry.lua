@@ -31,4 +31,4 @@ function Registry:get_hive(name)
   return self.hives[name]
 end
 
-return Registry
+return { Registry = Registry }

@@ -51,5 +51,4 @@ end
 
 return {
    Backend = Backend,
-   class = class
 }
