@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # lefty-escal - figure out how to elevate permissions in an environment, prioritizing policykit
 ##     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
 ##
@@ -20,10 +20,10 @@ set -euxo pipefail
 # escalators, with priority order
 LEFTY_ESCALATORS=(run0 pkexec doas sudo su)
 LEFTY_ESCAL_PICK=""
-for i in $LEFTY_ESCALATORS; do
-    if `which $i`; then
+for i in "${LEFTY_ESCALATORS[@]}"; do
+    if which "$i"; then
         LEFTY_ESCAL_PICK="${i}" break
     fi
 done
 
-exec $LEFTY_ESCAL_PICK ${@}
+exec $LEFTY_ESCAL_PICK "${@}"
