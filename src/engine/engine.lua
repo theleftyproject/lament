@@ -20,3 +20,5 @@ local lament = require("lament")
 lament.engine = {}
 require("engine.apply")
 require("engine.recalibrate")
+
+return lament.engine
