@@ -19,9 +19,11 @@ local class = require("pl.class")
 
 local Backend = class()
 
-function Backend:_init()
+function Backend:_init(path)
    --- Name of the backend
    self.name = "backend"
+   --- Path of the backend
+   self.path = path
    --- Hives the backend registers
    self.hives = {}
    --- Files the backend accesses

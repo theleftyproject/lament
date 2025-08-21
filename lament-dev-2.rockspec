@@ -13,7 +13,9 @@ dependencies = {
    "luafilesystem",
    "lpeg",
    "argparse",
-   "lanes"
+   "lanes",
+   "sandbox",
+   "luasocket"
 }
 build = {
    type = "builtin",

@@ -1,0 +1,27 @@
+local sandbox = require("sandbox")
+local lament = require("lament")
+lament.sandbox = {}
+
+local env = {
+    math = math, string = string, table = table,
+    lpeg = require("lpeg"),
+    http = require("socket.http"),
+    io = { open = io.open, read = io.read, write = io.write },
+    os = { time = os.time, date = os.date, difftime = os.difftime }
+}
+
+function lament.sandbox.apply_module(module_path)
+      local f, err = loadfile(module_path, "t", env)
+      if not f then
+         error(err)
+      end
+      return f.apply()
+end
+
+function lament.sandbox.recalibrate_module(module_path)
+      local f, err = loadfile(module_path, "t", env)
+      if not f then
+         error(err)
+      end
+      return f.recalibrate()
+end
