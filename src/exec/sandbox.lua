@@ -27,6 +27,7 @@ function lament.sandbox.apply_module(module_path)
          error(err)
       end
       if f["apply"] == nil then
+---@diagnostic disable-next-line: undefined-field
          return f.apply()
       end
       return error("this backend lacks an apply field")
@@ -38,6 +39,7 @@ function lament.sandbox.recalibrate_module(module_path)
          error(err)
       end
       if f["recalibrate"] == nil then
+---@diagnostic disable-next-line: undefined-field
          return f.recalibrate()
       end
       return error("this backend lacks a recalibrate field")
