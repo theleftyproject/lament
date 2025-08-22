@@ -38,6 +38,7 @@ hostenv.os.execute = os.execute
 local proxy = {}
 proxy.io = {}
 proxy.os = {}
+proxy.http = {}
 
 function proxy.__index(keyname)
    if keyname == "print" then
@@ -67,11 +68,22 @@ function proxy.io.__index(keyname)
       -- write to this file
       return hostenv.io.write
    end
-   error("module is not authorized to use module or function " .. keyname)
+   error("module is not authorized to use module or function io." .. keyname)
 end
 
 function proxy.os.__index(keyname)
-
+   if keyname == "time" then
+      return hostenv.os.time
+   elseif keyname == "difftime" then
+      return hostenv.os.difftime
+   elseif keyname == "date" then
+      return hostenv.os.date
+   elseif keyname == "execute" then
+      -- ACE VULNERABILITY SPOT HERE
+      -- TODO: Authorize module to execute commands
+      return hostenv.os.execute
+   end
+   error("module is not authorized to use module or function os." .. keyname)
 end
 
 return proxy
