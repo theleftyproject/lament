@@ -1,3 +1,4 @@
+---@diagnostic disable: lowercase-global
 package = "lament"
 version = "dev-2"
 source = {
@@ -14,7 +15,6 @@ dependencies = {
    "lpeg",
    "argparse",
    "lanes",
-   "sandbox",
    "luasocket"
 }
 build = {

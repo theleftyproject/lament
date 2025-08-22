@@ -2,6 +2,8 @@
 /lua
 /lua_modules
 /.luarocks
+/build/lib/
+/build/share/*
 /docs/*.pdf
 /docs/*.fls
 /docs/*.aux
