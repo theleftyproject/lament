@@ -25,6 +25,7 @@ hostenv.core.error = error
 hostenv.lpeg = require("lpeg")
 hostenv.io = {}
 hostenv.io.open = io.open
+hostenv.io.close = io.close
 hostenv.io.read = io.read
 hostenv.io.write = io.write
 hostenv.os = {}
@@ -47,13 +48,29 @@ function proxy.__index(keyname)
       proxy.print("math function is being called")
       return hostenv.math
    end
-end
-
-function proxy.os.__index(keyname)
-
+   error("module is not authorized to use module or function " .. keyname)
 end
 
 function proxy.io.__index(keyname)
+   if keyname == "open" then
+      -- TODO: check if the module has the right to access
+      -- this file
+      return hostenv.io.open
+   elseif keyname == "close" then
+      return hostenv.io.close
+   elseif keyname == "read" then
+      -- TODO: check if the module has the right to
+      -- read this file
+      return hostenv.io.read
+   elseif keyname == "write" then
+      -- TODO: check if the module has the right to
+      -- write to this file
+      return hostenv.io.write
+   end
+   error("module is not authorized to use module or function " .. keyname)
+end
+
+function proxy.os.__index(keyname)
 
 end
 
