@@ -26,7 +26,7 @@ function lament.sandbox.apply_module(module_path)
       if not f then
          error(err)
       end
-      if f["apply"] == nil then
+      if f["apply"] ~= nil then
 ---@diagnostic disable-next-line: undefined-field
          return f.apply()
       end
@@ -38,7 +38,7 @@ function lament.sandbox.recalibrate_module(module_path)
       if not f then
          error(err)
       end
-      if f["recalibrate"] == nil then
+      if f["recalibrate"] ~= nil then
 ---@diagnostic disable-next-line: undefined-field
          return f.recalibrate()
       end
