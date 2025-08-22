@@ -15,7 +15,6 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local sandbox = require("sandbox")
 local lament = require("lament")
 lament.sandbox = {}
 
