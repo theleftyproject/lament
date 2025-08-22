@@ -48,6 +48,8 @@ function proxy.__index(keyname)
    elseif keyname == "math"  then
       proxy.print("math function is being called")
       return hostenv.math
+   elseif keyname == "lament" then
+      return require("lament")
    end
    error("module is not authorized to use module or function " .. keyname)
 end
