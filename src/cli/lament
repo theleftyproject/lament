@@ -1,4 +1,4 @@
-#!/bin/env lua5.4
+#!/bin/env lua
 -- src/cli/lament - Entry point for LAMENT
 --
 --     Copyright (C) 2024-2025  Kıvılcım Defne Öztürk
