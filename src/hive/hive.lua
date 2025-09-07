@@ -16,23 +16,39 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local class = require("pl.class")
+local key = require("key")
+local Key = key.Key
 
+---@class Hive
+---@field name string
+---@field _keys table
+---@field _values table
+--- Provides the top-most level of configuration entries.
 local Hive = class()
 
+---Instantiates a new [Hive]
+---@param name string Name of the hive.
 function Hive:_init(name)
   self.name = name
   self._keys = {}
   self._values = {}
 end
 
+---Registers a new key to the hive
+---@param key Key the new key to register.
 function Hive:register_key(key)
   self._keys[key.name] = key
 end
 
+---Gets the list of keys associated with the hive.
+---@return table keys The list of keys associated with the hive.
 function Hive:get_keys()
   return self._keys
 end
 
+---Accesses a key from LAMENT's inner api
+---@param keyname string A string that uniquely identifies the key being accessed
+---@return unknown
 function Hive:__index(keyname)
   local key = self._keys[keyname]
   if key then
