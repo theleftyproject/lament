@@ -18,37 +18,41 @@
 local key_resolver = require("hive.key_resolver")
 
 describe("key_resolver.parse_key_path", function()
+   it("parses simple dot-separated identifiers", function()
+      local path = "hive.foo.bar"
+      local keys = key_resolver.parse_key_path(path)
+      assert.are.same({ "hive", "foo", "bar" }, keys)
+   end)
 
-    it("parses simple dot-separated identifiers", function()
-        local path = "hive.foo.bar"
-        local keys = key_resolver.parse_key_path(path)
-        assert.are.same({"hive", "foo", "bar"}, keys)
-    end)
+   it("parses numeric keys", function()
+      local path = "hive.items.0.1"
+      local keys = key_resolver.parse_key_path(path)
+      assert.are.same({ "hive", "items", 0, 1 }, keys)
+   end)
 
-    it("parses numeric keys", function()
-        local path = "hive.items.0.1"
-        local keys = key_resolver.parse_key_path(path)
-        assert.are.same({"hive", "items", 0, 1}, keys)
-    end)
+   it("parses numeric keys inside brackets", function()
+      local path = 'hive.items.[0].[1]'
+      local keys = key_resolver.parse_key_path(path)
+      assert.are.same({"hive", "items", "0", "1"}, keys)
+   end)
 
-    it("parses quoted keys inside brackets", function()
-        local path = 'hive.["complex.key"].other'
-        local keys = key_resolver.parse_key_path(path)
-        assert.are.same({"hive", "complex.key", "other"}, keys)
-    end)
+   it("parses quoted keys inside brackets", function()
+      local path = 'hive.["complex.key"].other'
+      local keys = key_resolver.parse_key_path(path)
+      assert.are.same({ "hive", "complex.key", "other" }, keys)
+   end)
 
-    it("errors on unclosed quote", function()
-        local path = 'hive.["oops'
-        assert.has_error(function()
-            key_resolver.parse_key_path(path)
-        end, "Unclosed quote in key path")
-    end)
+   it("errors on unclosed quote", function()
+      local path = 'hive.["oops'
+      assert.has_error(function()
+         key_resolver.parse_key_path(path)
+      end, "Unclosed quote in key path")
+   end)
 
-    it("errors on invalid key after dot", function()
-        local path = "hive."
-        assert.has_error(function()
-            key_resolver.parse_key_path(path)
-        end)
-    end)
-
+   it("errors on invalid key after dot", function()
+      local path = "hive."
+      assert.has_error(function()
+         key_resolver.parse_key_path(path)
+      end)
+   end)
 end)
