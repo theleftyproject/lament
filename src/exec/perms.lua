@@ -61,3 +61,5 @@ end
 function lament.exec.perms.grant_perm(perm_set, perm)
    return bit.bor(perm_set, perm)
 end
+
+return lament.exec.perms
