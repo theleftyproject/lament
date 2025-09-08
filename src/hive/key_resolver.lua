@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-local lament = require("lament")
+-- local lament = require("lament")
 
 ---Resolves a key path
 ---@param path string The path to the key

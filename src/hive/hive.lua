@@ -16,8 +16,8 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local class = require("pl.class")
-local key = require("key")
-local Key = key.Key
+-- local gkey = require("key")
+-- local Key = gkey.Key
 
 ---@class Hive
 ---@field name string
