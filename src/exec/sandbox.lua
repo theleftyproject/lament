@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 local sandbox = require("sandbox")
 local lament = require("lament")
 lament.sandbox = {}
