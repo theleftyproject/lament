@@ -2,6 +2,8 @@ local sandbox = require("sandbox")
 local lament = require("lament")
 lament.sandbox = {}
 
+--- the environment that is not being masqueraded
+-- TODO: masquerade a controlled environment
 local env = {
     math = math, string = string, table = table,
     lpeg = require("lpeg"),
