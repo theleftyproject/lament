@@ -1,6 +1,6 @@
 -- lament.lua - major source file for lament
 --
---     Copyright (C) 2025  Kıvılcım Defne Öztürk
+--     Copyright (C) 2025  Kıvılcım İpek Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
