@@ -25,7 +25,7 @@ local function main(args)
   -- Global flags
   parser:flag("--apply -A",
       "Forwards apply the changes to the system's configuration")
-  parser:flag("--recalibrate -B",
+  parser:flag("--recalibrate --reconcile -B",
       "Backwards apply the changes in configuration to LAMENT's own configuration")
   parser:flag("--cross-calibrate -C",
       "[VERY EXPERIMENTAL] Perform application or recalibration based on which side is newer")
@@ -55,7 +55,7 @@ local function main(args)
   parser:option("--del-index -d")
          :args(1)
          :description("Only used for list keys. Delete the index from the sequence")
-  parser:flag("--clear",
+  parser:flag("--clear -c",
          "Clear the value of optional keys. Will error if used with compulsory keys")
 
   -- Option for 'get'
