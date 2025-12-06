@@ -59,23 +59,29 @@ LAMENT has three goals:
 - [ ]  Allow user-level declarative configuration of the `$HOME/.config/` directory.
 - [ ]  Provide a command line interface to LAMENT which can trigger explicit reconfiguration of the system.
   - [X]  Decide which command line parameters it will support.
-    - [] `--apply`/`--calibrate`/`-A` triggers application.
-    - [] `--recalibrate`/`--reconcile`/`-B` triggers recalibration.
-    - [] `--cross-calibrate`/`-C` triggers a simultaneous application and recalibration.
+
+    - [ ]  `--apply`/`--calibrate`/`-A` triggers application.
+    - [ ]  `--recalibrate`/`--reconcile`/`-B` triggers recalibration.
+    - [ ]  `--cross-calibrate`/`-C` triggers a simultaneous application and recalibration.
+
     - Commands **follow** the name of the key they will act on, not precede them.
       - It's `lament <key> set`, not `lament set <key>`
-    - [] The `set` command sets the value of a `<key>`
-      - [] Shall support the following for list keys
+
+    - [ ]  The `set` command sets the value of a `<key>`
+
+      - [ ]  Shall support the following for list keys
         - `--append`/`-a` to append a value to the end of a list
         - `--prepend`/`-p` to prepend a value to the start of a list
         - `--set-index`/`-s` to set a specific index of a list. **Lists are 1-indexed, not 0-indexed**.
         - `--nil-index`/`-n` to set a specific index of a list to `nil`. Compare it to the following.
         - `--del-index`/`-d` to **remove** a specific index of a list. This should **reduce the length of a list by 1**.
         - `--clear`/`-c` to **clear** a list. This removes all values from a list, **effectively setting the count of elements in the list to 0**.
-    - [] The `get` command retrieves the value of a `<key>`
+    - [ ]  The `get` command retrieves the value of a `<key>`
+
       - Shall support the following for list keys
         - `--index`/`--at`/`-i <n>` to retrieve a specific index of a list key. **Lists are 1-indexed**.
   - [X]  Implement a way to resolve configuration keys, the unique path to the property of the hive the user would like to modify or retrieve. The key format is `.foo.["bar baz"].1.quux`.
+
     - The leading dot is optional, it symbolizes `sysconf.` that will be used in the declarative configuration files.
     - Any key that does not contain spaces in its name is not required to be wrapped in square brackets.
     - Any key that does contain spaces in its name is required to be wrapped in `["..."]`, both the double quotes and the square brackets are **required**.
