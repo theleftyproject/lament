@@ -80,7 +80,7 @@ LAMENT has three goals:
 
       - Shall support the following for list keys
         - `--index`/`--at`/`-i <n>` to retrieve a specific index of a list key. **Lists are 1-indexed**.
-  - [ ]  Implement a way to resolve configuration keys, the unique path to the property of the hive the user would like to modify or retrieve. The key format is `.foo.["bar baz"].1.quux`.
+  - [X]  Implement a way to resolve configuration keys, the unique path to the property of the hive the user would like to modify or retrieve. The key format is `.foo.["bar baz"].1.quux`.
 
     - The leading dot is optional, it symbolizes `sysconf.` that will be used in the declarative configuration files.
     - Any key that does not contain spaces in its name is not required to be wrapped in square brackets.
