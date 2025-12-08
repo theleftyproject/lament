@@ -15,7 +15,8 @@ dependencies = {
    "argparse",
    "lanes",
    "sandbox",
-   "luasocket"
+   "luasocket",
+   "terminal"
 }
 build = {
    type = "builtin",
