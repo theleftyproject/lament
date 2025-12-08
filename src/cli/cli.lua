@@ -1,4 +1,4 @@
--- cli.lua - the command line interface
+-- src/cli/cli.lua - the command line interface
 --
 --     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
 --
@@ -17,6 +17,8 @@
 
 
 local argparse = require("argparse")
+-- TODO: Do make use of resolve
+-- local resolve = require("resolve")
 
 local function main(args)
   local parser = argparse("lament",
