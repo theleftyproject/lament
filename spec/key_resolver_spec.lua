@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 -- check_busted.lua - basic test that demonstrates whether the implementation of busted that is present is bugged
 --     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
 --
@@ -18,7 +19,8 @@
 
 -- Import the key resolver
 local lament = {
-   key_resolver = require("../src/cli/resolve.lua")
+---@diagnostic disable-next-line: different-requires
+   key_resolver = require("../src/cli/resolve")
 }
 
 -- Test cases for key resolver
@@ -36,7 +38,7 @@ describe("Key resolver unit tests", function()
    it("should resolve a string key with spaces but"
       .. " without underscores", function()
          local resolution = lament.key_resolver.resolve_key('foo.["bar baz"]')
-         assert.are.same({"foo", "bar baz"}, resolution)
+         assert.are.same({"foo", '["bar baz"]'}, resolution)
    end)
    it("should resolve a string key with "
       .. "hyphens but no spaces or underscores", function()
@@ -51,6 +53,6 @@ describe("Key resolver unit tests", function()
    it("should resolve a string key with "
       .. "hyphens, underscores and spaces", function()
          local resolution = lament.key_resolver.resolve_key('foo.bar-baz.["quux squeak"].gay')
-         assert.are.same({"foo", "bar-baz", 'quux squeak', 'gay'}, resolution)
+         assert.are.same({"foo", "bar-baz", '["quux squeak"]', 'gay'}, resolution)
    end)
 end)

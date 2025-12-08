@@ -37,8 +37,8 @@ local key_pattern = P{
          * Ct((key_segment * dot)^0 * key_segment)
 }
 
-local resolve_key(input)
-   return key_patter:match(input)
+local function resolve_key(input)
+   return key_pattern:match(input)
 end
 
 return {
