@@ -17,7 +17,8 @@
 
 
 local argparse = require("argparse")
-local resolve = require("resolve")
+-- TODO: Do make use of resolve
+-- local resolve = require("resolve")
 
 local function main(args)
   local parser = argparse("lament",
