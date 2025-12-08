@@ -32,6 +32,8 @@ LAMENT has three goals:
     - [X]  `utils/lefty-escal.sh` which is a way to grant root access regardless of what program is providing the ability to run a command as another user.
   - [X]  `spec/` which provides tests
   - [X]  `docs/` where documentation written using AMS-TeX is present
+  - [ ]  `test/` where the testing environment and automated lexpect scripts that will be called by tests under `spec/` are present
+    - [ ]  `test/env/` that provides the container environment for testing
   - [X]  `.forgejo/` for Nickel or Jsonnet scripts that generate YAML files for Forgejo actions
   - [X]  `.github/` for GitHub configuration
   - [X]  `.vscode/` for VSCode/VSCodium configuration.
