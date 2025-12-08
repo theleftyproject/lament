@@ -1,0 +1,7 @@
+FROM docker.io/library/alpine:3.21
+
+COPY ../.. /usr/share/lament
+RUN apk add lua
+
+WORKDIR /usr/share/lament
+ENTRYPOINT [ "/bin/sh" ]

@@ -9,6 +9,7 @@ description = {
    license = "GPLv3"
 }
 dependencies = {
+   "lua >= 5.4",
    "penlight",
    "luafilesystem",
    "lpeg",
