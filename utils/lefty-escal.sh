@@ -1,5 +1,5 @@
 #!/bin/bash
-# lefty-escal - figure out how to elevate permissions in an environment, prioritizing policykit
+# utils/lefty-escal.sh - figure out how to elevate permissions in an environment, prioritizing policykit
 ##     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
 ##
 ## This program is free software: you can redistribute it and/or modify

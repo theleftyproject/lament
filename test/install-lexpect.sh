@@ -1,5 +1,5 @@
 #!/bin/env sh
-## install-lexpect.sh - lexpect installation script for containers.
+## test/install-lexpect.sh - lexpect installation script for containers.
 ##     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
 ##
 ## This program is free software: you can redistribute it and/or modify
@@ -14,3 +14,27 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+if [[ ! -e /.dockerenv ]] || [[ ! -e /.containerenv ]]; then
+    echo "[ERROR] This script is for installing into containers"
+    exit 31
+fi
+
+if ! which cargo; then
+    echo "[ERROR] Malfunctioning environment (no cargo)"
+    exit 31
+fi
+
+# may be useful in future
+
+if [[ -e /.dockerenv ]]; then
+    export LEFTY_IN_DOCKER=1
+    export LEFTY_IN_CONTAINER=1
+    export LEFTY_CONTAINER_RT="docker"
+elif [[ -e /.containerenv ]]; then
+    export LEFTY_IN_PODMAN=1
+    export LEFTY_IN_CONTAINER=1
+    export LEFTY_CONTAINER_RT="oci"
+fi
+
+exec cargo install lexpect --git https://codeberg.org/KanakoTheGay/lexpect.git
