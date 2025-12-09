@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-field
--- check_busted.lua - basic test that demonstrates whether the implementation of busted that is present is bugged
+-- key_resolver_spec.lua - unit tests for key resolution.
 --     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
