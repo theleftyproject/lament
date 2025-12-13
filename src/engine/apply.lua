@@ -16,8 +16,21 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require("lament")
+local const = require("lament.const")
+local sandbox = require("sandbox")
 
 function lament.engine.apply()
+   local result = true
+   -- Load backend module registry
+   for i = 1, #const.globals._MODULES do
+      const.globals._MODULES[i]:init()
+   end
+   -- Invoke application
+   for i = 1, #const.globals._MODULES do
+      result = result and const.globals._MODULES[i]:apply(const.globals._SYSCONF)
+   end
+   return result
 end
+
 
 return lament.engine.apply

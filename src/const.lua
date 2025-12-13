@@ -1,6 +1,6 @@
--- src/engine/recalibrate.lua - application engine
+-- src/const.lua - Constants
 --
---     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
+--    Copyright (C) 2025 Kıvılcım İpek Defne Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -14,21 +14,20 @@
 --
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 local lament = require("lament")
-local const = require("lament.const")
+lament.const = {}
+lament.const.config = {}
+lament.const.config.DEFAULT_BACKEND_PATH = {
+   "/usr/share/lament/backends"
+}
+lament.const.config.DEFAULT_AUTOCONF_PATH = {
+   "/etc/lament/lament.conf.lua",
+   "/etc/lament/self.conf.lua",
+   "/etc/lament/auto.conf.lua"
+}
 
-function lament.engine.recalibrate()
-   local result = true
-   -- Load backend module registry
-   for i = 1, #const.globals._MODULES do
-      const.globals._MODULES[i]:init()
-   end
-   -- Invoke application
-   for i = 1, #const.globals._MODULES do
-      result = result and const.globals._MODULES[i]:recalibrate(const.globals._SYSCONF)
-   end
-   return result
-end
+lament.globals = {}
+lament.globals._SYSCONF = {}
+lament.globals._MODULES = {}
 
-return lament.engine.recalibrate
+return { const = lament.const, globals = lament.globals }
