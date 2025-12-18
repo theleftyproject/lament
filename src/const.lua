@@ -28,7 +28,13 @@ lament.const.config.DEFAULT_AUTOCONF_PATH = {
 
 -- WHY THE FUCK IS THIS HERE? IDK.
 lament.globals = {}
+--- The global system configuration object,
+--- This represents the state S in the configuration theory
 lament.globals._SYSCONF = {}
+--- The effective configuration object
+--- This represents the state E in the configuration theory
+lament.globals._EFFSTAT = {}
+--- Configuration modules. A backend may specify more than one module
 lament.globals._MODULES = {}
 
 return {
