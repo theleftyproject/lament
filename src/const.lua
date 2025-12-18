@@ -26,8 +26,14 @@ lament.const.config.DEFAULT_AUTOCONF_PATH = {
    "/etc/lament/auto.conf.lua"
 }
 
+-- WHY THE FUCK IS THIS HERE? IDK.
 lament.globals = {}
 lament.globals._SYSCONF = {}
 lament.globals._MODULES = {}
 
-return { const = lament.const, globals = lament.globals }
+return {
+   --- Constants
+   const = lament.const,
+   --- Global variables
+   globals = lament.globals
+}
