@@ -30,7 +30,10 @@ build = {
       ["lament.hive"] = "src/hive/hive.lua",
       ["lament.hive.key"] = "src/hive/key.lua",
       ["lament.interface.backend"] = "src/interface/backend.lua",
-      ["lament.interface.registry"] = "src/interface/registry.lua"
+      ["lament.interface.registry"] = "src/interface/registry.lua",
+      ["lament.log"] = "src/log/log.lua",
+      ["lament.exec.sandbox"] = "src/exec/sandbox.lua",
+      ["lament.const"] = "src/const.lua",
    },
    copy_directories = {
       "docs"
