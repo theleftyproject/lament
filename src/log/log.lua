@@ -45,7 +45,7 @@ function lament.log.error(msg, ...)
    return terminal.output.write(headers.error .. " " .. msg, ...)
 end
 
----comment
+---Logs a warning level message
 ---@param msg any
 ---@param ... unknown
 ---@return unknown
@@ -53,7 +53,7 @@ function lament.log.warn(msg, ...)
    return terminal.output.write(headers.warn .. " " .. msg, ...)
 end
 
----comment
+---Logs an informing level message
 ---@param msg any
 ---@param ... unknown
 ---@return unknown
@@ -61,7 +61,7 @@ function lament.log.info(msg, ...)
    return terminal.output.write(headers.info .. " " .. msg, ...)
 end
 
----comment
+---Logs a debug level message
 ---@param msg any
 ---@param ... unknown
 ---@return unknown
