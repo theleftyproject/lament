@@ -33,10 +33,10 @@ lament.log.colors = {
 }
 
 local headers = {
-   error = "[" .. lament.log.colors.error .. "ERROR" .. lament.log.colors.reset .. "]",
-   warn = "[" .. lament.log.colors.warn .. "WARN " .. lament.log.colors.reset .. "]",
-   info = "[" .. lament.log.colors.info .. "INFO " .. lament.log.colors.reset .. "]",
-   debug = "[" .. lament.log.colors.debug .. "DEBUG" .. lament.log.colors.reset .. "]",
+   error = lament.log.colors.reset .. "[" .. lament.log.colors.error .. "ERROR" .. lament.log.colors.reset .. "]",
+   warn = lament.log.colors.reset .. "[" .. lament.log.colors.warn .. "WARN " .. lament.log.colors.reset .. "]",
+   info = lament.log.colors.reset .. "[" .. lament.log.colors.info .. "INFO " .. lament.log.colors.reset .. "]",
+   debug = lament.log.colors.reset .. "[" .. lament.log.colors.debug .. "DEBUG" .. lament.log.colors.reset .. "]",
 }
 
 ---Logs an error level message
