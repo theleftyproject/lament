@@ -1,4 +1,4 @@
--- src/const.lua - Constants
+-- src/log.lua - Logger
 --
 --    Copyright (C) 2025 - 2026 Kıvılcım İpek Defne Öztürk
 --
