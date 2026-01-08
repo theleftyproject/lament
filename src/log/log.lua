@@ -19,7 +19,7 @@ local terminal = require("terminal")
 
 -- Boot terminal
 terminal.initialize({
-   filehandle = io.stderr
+   filehandle = io.stdout
 })
 
 lament.log = {}
