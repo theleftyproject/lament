@@ -68,3 +68,5 @@ end
 function lament.log.debug(msg, ...)
    return terminal.output.write(headers.info .. " " .. msg, ...)
 end
+
+return lament.log

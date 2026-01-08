@@ -17,18 +17,32 @@
 
 local lament = require("lament")
 local const = require("lament.const")
+local log = require("lament.log")
 local sandbox = require("sandbox")
 
 function lament.engine.apply()
+   local init_result = true
+   local _init_result = true
    local result = true
+   local _result = true
+   local err
    -- Load backend module registry
    for i = 1, #const.globals._MODULES do
-      const.globals._MODULES[i]:init()
+      _init_result, err = const.globals._MODULES[i]:init()
+      init_result = _init_result and init_result
+      -- In case a module fails to initialize...
+      if not init_result then
+         -- Report the error regarding the initialization of the module
+         log.error(err)
+      end
    end
    -- Invoke application
    for i = 1, #const.globals._MODULES do
-      result = result and const.globals._MODULES[i]:apply(const.globals._SYSCONF)
+      _result, err = const.globals._MODULES[i]:apply(const.globals._SYSCONF)
+      result = result and _result
+      
    end
+
    return result
 end
 
