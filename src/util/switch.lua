@@ -1,6 +1,6 @@
 -- switch.lua - Provides switch statement
 --
---     Copyright (C) 2024-2025  Sylviettee, Sparkles-Laurel
+--     Copyright (C) 2024 - 2026  Sylviettee, Sparkles-Laurel
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
