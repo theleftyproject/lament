@@ -1,4 +1,5 @@
 *.tex           linguist-detectable
 *.nu            linguist-detectable
+*.jsonnet       linguist-detectable
 *.lua           linguist-language=lua
 Justfile        linguist-detectable
