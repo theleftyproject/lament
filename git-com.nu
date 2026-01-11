@@ -16,4 +16,6 @@ if (which jsonnet) == [] {
 # Manifest a yaml document from the jsonnet spec
 let yaml_doc: string  = ^jsonnet .git-com.jsonnet | from json
 
+# Print the git-com configuration into the spec
+echo $yaml_doc out> .git-com.yml
 
