@@ -1,3 +1,4 @@
 *.tex           linguist-detectable
+*.nu            linguist-detectable
 *.lua           linguist-language=lua
 Justfile        linguist-detectable
