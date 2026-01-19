@@ -1,0 +1,53 @@
+commit-description:
+  allow-empty: true
+  destination: "body"
+  instructions: "Please describe your changes..."
+  placeholder: "(optional text)"
+  type: "multiline-text"
+commit-type:
+  destination: "title"
+  instructions: "What type of work was done?"
+  options:
+  - "fix"
+  - "feat"
+  - "build"
+  - "chore"
+  - "ci"
+  - "docs"
+  - "style"
+  - "refactor"
+  - "perf"
+  - "test"
+  - "fix!"
+  - "feat!"
+  type: "select"
+scope:
+  after-string: ")"
+  allow-empty: true
+  before-string: "("
+  destination: "title"
+  instructions: "(optional) What section of codebase? "
+  options:
+  - "cli"
+  - "engine"
+  - "exec"
+  - "hive"
+  - "interface"
+  - "log"
+  - "util"
+  - "global"
+  - "infra"
+  - "test"
+  type: "select"
+subject:
+  before-string: " "
+  destination: "title"
+  placeholder: "a short description..."
+  type: "text"
+ticket-number:
+  allow-empty: true
+  before-string: "\n\nTicket: "
+  data-type: "integer"
+  destination: "body"
+  instructions: "Associated ticket number (if any)"
+  type: "text"

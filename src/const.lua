@@ -1,6 +1,6 @@
--- src/engine/engine.lua - root of the engine
+-- src/const.lua - Constants
 --
---     Copyright (C) 2024 - 2026  Kıvılcım İpek Afet Öztürk
+--    Copyright (C) 2025 - 2026 Kıvılcım İpek Afet Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -14,11 +14,19 @@
 --
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 local lament = require("lament")
+lament.const = {}
+lament.const.config = {}
+lament.const.config.DEFAULT_BACKEND_PATH = {
+   "/usr/share/lament/backends"
+}
+lament.const.config.DEFAULT_AUTOCONF_PATH = {
+   "/etc/lament/lament.conf.lua",
+   "/etc/lament/self.conf.lua",
+   "/etc/lament/auto.conf.lua"
+}
 
-lament.engine = {}
-require("engine.apply")
-require("engine.recalibrate")
-
-return lament.engine
+return {
+   --- Constants
+   const = lament.const,
+}

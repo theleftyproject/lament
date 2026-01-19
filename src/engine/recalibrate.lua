@@ -1,6 +1,6 @@
 -- src/engine/recalibrate.lua - application engine
 --
---     Copyright (C) 2024-2025  Kıvılcım İpek Defne Öztürk
+--     Copyright (C) 2024 - 2026  Kıvılcım İpek Afet Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -16,8 +16,19 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require("lament")
+local const = require("lament.const")
 
 function lament.engine.recalibrate()
+   local result = true
+   -- Load backend module registry
+   for i = 1, #const.globals._MODULES do
+      const.globals._MODULES[i]:init()
+   end
+   -- Invoke application
+   for i = 1, #const.globals._MODULES do
+      result = result and const.globals._MODULES[i]:recalibrate(const.globals._SYSCONF)
+   end
+   return result
 end
 
 return lament.engine.recalibrate

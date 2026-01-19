@@ -1,6 +1,6 @@
--- src/engine/engine.lua - root of the engine
+-- src/globals.lua - Global variables
 --
---     Copyright (C) 2024 - 2026  Kıvılcım İpek Afet Öztürk
+--    Copyright (C) 2026 Kıvılcım İpek Afet Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,8 +17,19 @@
 
 local lament = require("lament")
 
-lament.engine = {}
-require("engine.apply")
-require("engine.recalibrate")
+--- The global system configuration object,
+--- This represents the state S in the configuration theory
+lament.globals._SYSCONF = {}
 
-return lament.engine
+--- The effective configuration object
+--- This represents the state E in the configuration theory
+lament.globals._EFFSTAT = {}
+
+--- Configuration modules.
+--- A backend may specify more than one module
+lament.globals._MODULES = {}
+
+return {
+   --- Global variables
+   globals = lament.globals
+}
