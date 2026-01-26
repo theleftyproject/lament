@@ -2,14 +2,15 @@
 package = "lament"
 version = "dev-2"
 source = {
-   url = "git+https://github.com/Sparkles-Laurel/lament.git"
+   url = "git+https://github.com/theleftyproject/lament.git"
 }
 description = {
    detailed = "**L**efty **A**pplication, **M**odification, **E**diting and **N**otification **T**ool",
-   homepage = "https://github.com/Sparkles-Laurel/lament",
+   homepage = "https://getconfigured.org",
    license = "GPLv3"
 }
 dependencies = {
+   "luajit >= 2.0",
    "penlight",
    "luafilesystem",
    "lpeg",

@@ -1,0 +1,8 @@
+FROM docker.io/library/archlinux:base-devel AS stage1
+
+WORKDIR /usr/share/lament
+COPY ../.. .
+RUN pacman -Syu --noconfirm lua luarocks just \
+     busted busybox nushell texlive-bin \
+     podman
+WORKDIR /
