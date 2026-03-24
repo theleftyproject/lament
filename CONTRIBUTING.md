@@ -19,7 +19,11 @@ Free and open source software development is a collaborative job. Various people
 
 - We generally follow the [style guidelines of LuaRocks](https://github.com/luarocks/lua-style-guide).
 - However we have one strict enforcement, use `local function`s whenever possible.
-
+- `require` statements need to be followed by braces, very strictly, as follows:
+  ```lua
+  local smth = require("foo")
+  require("bar")
+  ```
 ## Pull requests
 
 - Use concise titles for pull requests and describe what it does well.

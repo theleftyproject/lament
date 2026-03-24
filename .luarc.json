@@ -3,5 +3,6 @@
     "diagnostics.globals": [
         "describe",
         "it"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }
