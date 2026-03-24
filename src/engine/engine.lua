@@ -20,5 +20,6 @@ local lament = require("lament")
 lament.engine = {}
 require("engine.apply")
 require("engine.recalibrate")
+require("engine.cross_calibrate")
 
 return lament.engine

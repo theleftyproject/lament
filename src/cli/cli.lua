@@ -64,7 +64,6 @@ local function main(args)
   parser:option("--index --at -i")
         :args(1)
         :description("Only used for list keys. Get the value on the specified index")
-
   local parsed = parser:parse(args)
 
    if parsed.help then
@@ -73,47 +72,26 @@ local function main(args)
    end
 
    if parsed.apply then
-      print("[DUMMY] Applying changes to system configuration")
-      return 0
+      return require("cli.cmd.apply")(parsed)
    elseif parsed.recalibrate then
-      print("[DUMMY] Backwards applying changes to LAMENT's own configuration")
-      return 0
+      return require("cli.cmd.recalibrate")(parsed)
    elseif parsed.cross_calibrate then
-      print("[DUMMY] Performing cross-calibration (experimental)")
-      return 0
+      return require("cli.cmd.cross_calibrate")(parsed)
    end
 
    if parsed.key and parsed.action then
       if parsed.action == "get" then
-      print("[DUMMY] Getting key:", parsed.key)
-      if parsed.index then
-        print("[DUMMY] Getting index:", parsed.index)
+         return require("cli.cmd.get")(parsed)
+      elseif parsed.action == "set" then
+         return require("cli.cmd.set")(parsed)
+      else
+         print("Error: <action> must be either 'get' or 'set'")
+         return 1
       end
-      return 0
-   elseif parsed.action == "set" then
-      local value = parsed[1] or "<no value>"
-      print("[DUMMY] Setting key:", parsed.key, "with value:", value)
-      if parsed.clear then
-         print("[DUMMY] Clearing key value")
-      end
-      if parsed.append then
-         print("[DUMMY] Appending:", parsed.append)
-      elseif parsed.prepend then
-         print("[DUMMY] Prepending:", parsed.prepend)
-      elseif parsed.set_index then
-         print("[DUMMY] Setting index:", parsed.set_index[1], "to", parsed.set_index[2])
-      elseif parsed.nil_index then
-         print("[DUMMY] Setting index:", parsed.nil_index, "to nil")
-      elseif parsed.del_index then
-         print("[DUMMY] Deleting index:", parsed.del_index)
-      end
-      return 0
-    else
-      print("Error: <action> must be either 'get' or 'set'")
-      return 1
-    end
-   else
-      print("Error: Missing <key> and/or <action> arguments")
+   end
+
+   if not parsed.apply and not parsed.recalibrate and not parsed.cross_calibrate then
+      print("Error: Missing action argument")
       print(parser:get_help())
       return 1
    end
