@@ -2,4 +2,6 @@
 *.nu            linguist-detectable
 *.jsonnet       linguist-detectable
 *.lua           linguist-language=lua
+*.rs            linguist-detectable
+*.rs            linguist-language=rust
 Justfile        linguist-detectable
