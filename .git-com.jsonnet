@@ -31,6 +31,7 @@ std.manifestYamlDoc({
             "refactor",
             "perf",
             "test",
+            "qol", // developer quality of life
             "fix!", // indicates a breaking change
             "feat!", // indicates a breaking change
         ]

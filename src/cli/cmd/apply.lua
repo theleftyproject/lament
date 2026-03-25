@@ -1,6 +1,6 @@
--- src/engine/engine.lua - root of the engine
+-- src/cli/cmd/apply.lua - application command
 --
---     Copyright (C) 2024 - 2026  Kıvılcım İpek Afet Öztürk
+--     Copyright (C) 2026  Kıvılcım İpek Afet Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -16,10 +16,20 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require("lament")
-
-lament.engine = {}
+local engine = require("engine")
+local log = require("log")
 require("engine.apply")
-require("engine.recalibrate")
-require("engine.cross_calibrate")
 
-return lament.engine
+local function apply(parsed)
+   log.info("Starting configuration application...")
+   local result = engine.apply()
+   if result then
+      log.info("Application successful.")
+      return 0
+   else
+      log.error("Application failed.")
+      return 1
+   end
+end
+
+return apply

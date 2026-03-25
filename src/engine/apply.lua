@@ -40,11 +40,9 @@ function lament.engine.apply()
    for i = 1, #const.globals._MODULES do
       _result, err = const.globals._MODULES[i]:apply(const.globals._SYSCONF)
       result = result and _result
-
    end
 
    return result
 end
-
 
 return lament.engine.apply

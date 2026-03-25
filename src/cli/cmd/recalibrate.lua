@@ -1,6 +1,6 @@
--- src/engine/engine.lua - root of the engine
+-- src/cli/cmd/recalibrate.lua - recalibration command
 --
---     Copyright (C) 2024 - 2026  Kıvılcım İpek Afet Öztürk
+--     Copyright (C) 2026  Kıvılcım İpek Afet Öztürk
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -16,10 +16,20 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local lament = require("lament")
-
-lament.engine = {}
-require("engine.apply")
+local engine = require("engine")
+local log = require("log")
 require("engine.recalibrate")
-require("engine.cross_calibrate")
 
-return lament.engine
+local function recalibrate(parsed)
+   log.info("Starting configuration recalibration...")
+   local result = engine.recalibrate()
+   if result then
+      log.info("Recalibration successful.")
+      return 0
+   else
+      log.error("Recalibration failed.")
+      return 1
+   end
+end
+
+return recalibrate

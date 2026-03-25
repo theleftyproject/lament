@@ -18,8 +18,9 @@ commit-type:
   - "refactor"
   - "perf"
   - "test"
-  - "fix!"
-  - "feat!"
+  - "qol"
+  - "fix!" # indicates a breaking change
+  - "feat!" # indicates a breaking change
   type: "select"
 scope:
   after-string: ")"
