@@ -34,10 +34,12 @@ mod config;
 mod env;
 mod error;
 mod sandbox;
+pub mod types;
 
 pub use config::{Hive, Key, Registry};
 pub use env::SandboxEnv;
 pub use sandbox::Sandbox;
+pub use types::Value;
 
 // ---------------------------------------------------------------------------
 // Lua C extension entry point
@@ -92,9 +94,10 @@ mod tests {
     #[test]
     fn test_registry_hive_key() {
         use crate::config::{Hive, Key, Registry};
+        use crate::types::Value;
         let mut reg = Registry::new();
         let mut hive = Hive::new("fonts");
-        let key = Key::new("size", LuaValue::Integer(12));
+        let key = Key::new("size", Value::Integer(12));
         hive.register_key(key);
         reg.register_hive(hive);
 
@@ -104,7 +107,7 @@ mod tests {
             .get_key("size")
             .unwrap()
             .get();
-        assert_eq!(v, LuaValue::Integer(12));
+        assert_eq!(v, Value::Integer(12));
     }
 
     // ── Load a Lua script and call apply ────────────────────────────────
