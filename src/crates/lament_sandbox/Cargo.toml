@@ -1,0 +1,12 @@
+[package]
+name = "lament_sandbox"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+chrono = "0.4.44"
+mlua = { version = "0.11.6", features = ["lua55", "vendored", "macros", "serialize", "userdata-wrappers", "serde"] }
+serde = { version = "1.0.228", features = ["derive"] }

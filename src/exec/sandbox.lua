@@ -28,23 +28,25 @@ masq_env.io = {}
 masq_env.os = {}
 
 function lament.sandbox.apply_module(module_path)
-      local f, err = loadfile(module_path, "t", masq_env)
-      if not f then
+      local chunk, err = loadfile(module_path, "t", masq_env)
+      if not chunk then
          error(err)
       end
-      if f["apply"] == nil then
-         return f.apply()
+      local mod = chunk()
+      if mod and mod.apply then
+         return mod:apply()
       end
-      return error("this backend lacks an apply field")
+      error("this backend lacks an apply field")
 end
 
 function lament.sandbox.recalibrate_module(module_path)
-      local f, err = loadfile(module_path, "t", masq_env)
-      if not f then
+      local chunk, err = loadfile(module_path, "t", masq_env)
+      if not chunk then
          error(err)
       end
-      if f["recalibrate"] == nil then
-         return f.recalibrate()
+      local mod = chunk()
+      if mod and mod.recalibrate then
+         return mod:recalibrate()
       end
-      return error("this backend lacks a recalibrate field")
+      error("this backend lacks a recalibrate field")
 end
