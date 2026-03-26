@@ -1,5 +1,6 @@
 local lament = require("lament")
 local log = require("log")
+---@diagnostic disable-next-line: different-requires
 local resolve_key = require("cli.resolve").resolve_key
 local const = require("lament.const")
 
