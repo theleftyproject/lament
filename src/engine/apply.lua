@@ -18,7 +18,7 @@
 local lament = require("lament")
 local const = require("lament.const")
 local log = require("lament.log")
-local sandbox = require("sandbox")
+local _sandbox = require("sandbox")
 
 function lament.engine.apply()
    local init_result = true
