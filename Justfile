@@ -109,4 +109,6 @@ clean:
 [doc("Executes the project")]
 [group("exec")]
 run *args:
+    LUA_PATH="./src/?.lua;./src/?/init.lua;;" \
+    LUA_CPATH="./src/crates/lament_sandbox/target/debug/lib?.so;;" \
     {{ lament }} {{ args }}
