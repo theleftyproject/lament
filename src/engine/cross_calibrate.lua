@@ -37,8 +37,8 @@ function lament.engine.cross_calibrate()
    for i = 1, #const.globals._MODULES do
       local _init_result, _err = const.globals._MODULES[i]:init()
       init_result = _init_result and init_result
-      if not _init_result and err then
-         log.error(err)
+      if not _init_result and _err then
+         log.error(_err)
       end
    end
 
