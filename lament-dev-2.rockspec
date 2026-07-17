@@ -33,7 +33,8 @@ build = {
       ["lament.interface.registry"] = "src/interface/registry.lua",
       ["lament.log"] = "src/log/log.lua",
       ["lament.exec.sandbox"] = "src/exec/sandbox.lua",
-      ["lament.const"] = "src/const.lua",
+      ["lament.const"] = "src/const.lua"
+      ["lament.cli.resolver"] = "src/cli/resolve.lua",
    },
    copy_directories = {
       "docs"

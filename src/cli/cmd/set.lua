@@ -1,6 +1,6 @@
 local lament = require("lament")
 local log = require("log")
-local resolve_key = require("cli.resolve").resolve_key
+local resolve_key = require("lament.cli.resolver").resolve_key
 local const = require("lament.const")
 
 local function set(parsed)
