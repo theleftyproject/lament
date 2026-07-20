@@ -17,6 +17,7 @@
 
 local class = require("pl.class")
 
+--- Represents a configuration backend
 local Backend = class()
 
 --- Pick the first errorneous one from pre-run, run and post-run
