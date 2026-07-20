@@ -67,14 +67,14 @@ function Backend:_init(path)
 end
 
 function Backend:init()
-   pre_err = self:pre_init()
+   local pre_err = self:pre_init()
    if pre_err ~= nil then
       return pre_err
    end
 
    self.active = true
 
-   post_err = self:post_init()
+   local post_err = self:post_init()
    if post_err ~= nil then
       self.active = false
       return post_err
@@ -84,14 +84,14 @@ function Backend:init()
 end
 
 function Backend:quit()
-   pre_err = self:pre_quit()
+   local pre_err = self:pre_quit()
    if pre_err ~= nil then
       return pre_err
    end
 
    self.active = false
 
-   post_err = self:post_quit()
+   local post_err = self:post_quit()
    if post_err ~= nil then
       self.active = true
       return post_err
