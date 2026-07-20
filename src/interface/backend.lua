@@ -22,11 +22,11 @@ local Backend = class()
 
 --- Pick the first errorneous one from pre-run, run and post-run
 local function pre_post_pick(pre, run, post)
-   if pre != nil then
+   if pre ~= nil then
       return pre
-   elseif run != nil then
+   elseif run ~= nil then
       return run
-   elseif post != nil then
+   elseif post ~= nil then
       return post
    end
 
@@ -68,14 +68,14 @@ end
 
 function Backend:init()
    pre_err = self:pre_init()
-   if pre_err != nil then
+   if pre_err ~= nil then
       return pre_err
    end
 
    self.active = true
 
    post_err = self:post_init()
-   if post_err != nil then
+   if post_err ~= nil then
       self.active = false
       return post_err
    end
@@ -85,14 +85,14 @@ end
 
 function Backend:quit()
    pre_err = self:pre_quit()
-   if pre_err != nil then
+   if pre_err ~= nil then
       return pre_err
    end
 
    self.active = false
 
    post_err = self:post_quit()
-   if post_err != nil then
+   if post_err ~= nil then
       self.active = true
       return post_err
    end
