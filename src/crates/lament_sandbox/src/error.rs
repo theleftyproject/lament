@@ -25,11 +25,11 @@ pub(crate) fn runtime(msg: impl Into<String>) -> LuaError {
 
 /// Assert that a required field exists in a module table; return a
 /// [`LuaError`] if it is absent or `nil`.
-pub(crate) fn require_field<'lua>(
-    table: &LuaTable<'lua>,
+pub(crate) fn require_field(
+    table: &LuaTable,
     field: &str,
-) -> LuaResult<LuaValue<'lua>> {
-    let v: LuaValue<'_> = table.get(field)?;
+) -> LuaResult<LuaValue> {
+    let v: LuaValue = table.get(field)?;
     if v == LuaValue::Nil {
         Err(runtime(format!(
             "this backend lacks a `{field}` field"

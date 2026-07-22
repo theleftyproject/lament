@@ -57,7 +57,13 @@ pub use types::Value;
 /// sb:load_script("/path/to/backend.lua")
 /// sb:call("apply")
 /// ```
-#[mlua::lua_module]
+#[unsafe(no_mangle)]
+pub unsafe extern "C-unwind" fn luaopen_lament_sandbox(
+    state: *mut mlua::ffi::lua_State,
+) -> std::os::raw::c_int {
+    unsafe { Lua::entrypoint1(state, lament_sandbox) }
+}
+
 fn lament_sandbox(lua: &Lua) -> LuaResult<LuaTable> {
     let module = lua.create_table()?;
 

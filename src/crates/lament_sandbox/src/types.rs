@@ -289,13 +289,13 @@ impl FromLua for Value {
                 }
                 Err(LuaError::FromLuaConversionError {
                     from: "UserData",
-                    to: "Value",
+                    to: "Value".to_string(),
                     message: Some("Unsupported UserData type for Value".to_string()),
                 })
             }
             _ => Err(LuaError::FromLuaConversionError {
                 from: "LuaValue",
-                to: "Value",
+                to: "Value".to_string(),
                 message: Some(format!("Cannot convert {} to Value", value.type_name())),
             }),
         }

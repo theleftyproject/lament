@@ -6,7 +6,11 @@ edition = "2024"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[features]
+default = ["vendored-lua"]
+vendored-lua = ["mlua/vendored"]
+
 [dependencies]
-chrono = "0.4.44"
-mlua = { version = "0.11.6", features = ["lua55", "vendored", "macros", "serialize", "userdata-wrappers", "serde"] }
+chrono = { version = "0.4.44", features = ["serde"] }
+mlua = { version = "0.11.6", features = ["lua55", "macros", "serialize", "userdata-wrappers", "serde"] }
 serde = { version = "1.0.228", features = ["derive"] }

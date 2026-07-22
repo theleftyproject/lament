@@ -198,7 +198,7 @@ impl LuaUserData for LuaSandbox {
         });
 
         methods.add_method("load_bytecode", |_lua, this, bytes: LuaString| {
-            this.inner_mut().load_bytecode(bytes.as_bytes())
+            this.inner_mut().load_bytecode(&bytes.as_bytes())
         });
 
         methods.add_method("call", |_lua, this, fn_name: String| {

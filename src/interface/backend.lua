@@ -17,7 +17,21 @@
 
 local class = require("pl.class")
 
+--- Represents a configuration backend
 local Backend = class()
+
+--- Pick the first errorneous one from pre-run, run and post-run
+local function pre_post_pick(pre, run, post)
+   if pre ~= nil then
+      return pre
+   elseif run ~= nil then
+      return run
+   elseif post ~= nil then
+      return post
+   end
+
+   return nil
+end
 
 function Backend:_init(path)
    --- Name of the backend
@@ -28,27 +42,76 @@ function Backend:_init(path)
    self.hives = {}
    --- Files the backend accesses
    self.open_files = {}
+   --- Whether the backend is enabled
    self.active = false
+   --- Event handler for pre_init event
+   self.pre_init = function (self) end
+   --- Event handler for post_init event
+   self.post_init = function (self) end
+   --- Event handler for pre_quit event
+   self.pre_quit = function (self) end
+   --- Event handler for post_quit event
+   self.post_quit = function (self) end
+   --- Event handler for pre_apply event
+   self.pre_apply = function (self) end
+   --- Event handler for post_apply event
+   self.post_apply = function (self) end
+   --- Event handler for pre_recalibrate event
+   self.pre_recalibrate = function (self) end
+   --- Event handler for post_recalibrate event
+   self.post_recalibrate = function (self) end
+   --- Event handler for applying event
+   self.applying = function (self) end
+   --- Event handler for recalibrating event
+   self.recalibrating = function (self) end
 end
 
 function Backend:init()
+   local pre_err = self:pre_init()
+   if pre_err ~= nil then
+      return pre_err
+   end
+
    self.active = true
+
+   local post_err = self:post_init()
+   if post_err ~= nil then
+      self.active = false
+      return post_err
+   end
+
+   return nil
 end
 
 function Backend:quit()
+   local pre_err = self:pre_quit()
+   if pre_err ~= nil then
+      return pre_err
+   end
+
    self.active = false
+
+   local post_err = self:post_quit()
+   if post_err ~= nil then
+      self.active = true
+      return post_err
+   end
+
+   return nil
 end
 
 function Backend:apply()
    if not self.active then
-      return
+      return nil
    end
+   return pre_post_pick(self:pre_apply(), self:applying(), self:post_apply())
 end
 
 function Backend:recalibrate()
    if not self.active then
-      return
+      return nil
    end
+   return pre_post_pick(self:pre_recalibrate(), self:recalibrating(), self:post_recalibrate())
 end
 
 return {
