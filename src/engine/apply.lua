@@ -18,7 +18,7 @@
 local lament = require("lament")
 local const = require("lament.const")
 local log = require("lament.log")
-local _sandbox = require("sandbox")
+local sandbox = require("lament.exec.sandbox")
 
 function lament.engine.apply()
    local init_result = true
@@ -38,8 +38,19 @@ function lament.engine.apply()
    end
    -- Invoke application
    for i = 1, #const.globals._MODULES do
-      _result, err = const.globals._MODULES[i]:apply(const.globals._SYSCONF)
+      local module = const.globals._MODULES[i]
+      if module.path ~= nil then
+         _result, err = sandbox.apply_module(module.path)
+      else
+         _result, err = module:apply(const.globals._SYSCONF)
+      end
+      if _result == nil and err == nil then
+         _result = true
+      end
       result = result and _result
+      if err then
+         log.error(err)
+      end
    end
 
    return result

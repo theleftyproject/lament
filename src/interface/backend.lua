@@ -68,7 +68,7 @@ end
 
 function Backend:init()
    local pre_err = self:pre_init()
-   if pre_err ~= nil then
+   if pre_err ~= nil then
       return pre_err
    end
 

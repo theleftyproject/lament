@@ -17,6 +17,8 @@
 
 local lament = require("lament")
 local const = require("lament.const")
+local log = require("lament.log")
+local sandbox = require("lament.exec.sandbox")
 
 function lament.engine.recalibrate()
    local result = true
@@ -26,7 +28,20 @@ function lament.engine.recalibrate()
    end
    -- Invoke application
    for i = 1, #const.globals._MODULES do
-      result = result and const.globals._MODULES[i]:recalibrate(const.globals._SYSCONF)
+      local module = const.globals._MODULES[i]
+      local _result, err
+      if module.path ~= nil then
+         _result, err = sandbox.recalibrate_module(module.path)
+      else
+         _result, err = module:recalibrate(const.globals._SYSCONF)
+      end
+      if _result == nil and err == nil then
+         _result = true
+      end
+      result = result and _result
+      if err then
+         log.error(err)
+      end
    end
    return result
 end

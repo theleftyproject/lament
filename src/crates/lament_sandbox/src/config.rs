@@ -19,8 +19,12 @@
 //! chunks as userdata so that `lament.config.<hive>.<key>` indexing works
 //! through the `__index` / `__newindex` metamethods below.
 
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
 use crate::error::runtime;
 use crate::types::Value;
+use mlua::prelude::*;
 
 // ---------------------------------------------------------------------------
 // Key
@@ -28,14 +32,26 @@ use crate::types::Value;
 
 /// A named, optionally-validated configuration slot inside a [`Hive`].
 ///
-/// Mirrors `Key` from `src/hive/key.lua`.
-#[derive(Clone)]
+/// Mirrors `Key` from `src/hive/key
+/// .lua`.
+#[derive(Debug)]
 pub struct Key {
     pub name: String,
     pub default: Value,
     /// Optional Lua validator function (`function(v) -> bool`).
     pub validate: Option<LuaRegistryKey>,
     value: Option<Value>,
+}
+
+impl Clone for Key {
+    fn clone(&self) -> Self {
+        Self {
+            name: self.name.clone(),
+            default: self.default.clone(),
+            validate: None,
+            value: self.value.clone(),
+        }
+    }
 }
 
 impl Key {
@@ -61,7 +77,7 @@ impl Key {
     /// Set the value, running `validate` if present.
     pub fn set(&mut self, lua: &Lua, value: Value) -> LuaResult<()> {
         if let Some(reg) = &self.validate {
-            let f: LuaFunction<'_> = lua.registry_value(reg)?;
+            let f: LuaFunction = lua.registry_value(reg)?;
             // We convert Value back to Lua for the validator function
             let ok: bool = f.call(value.clone().into_lua(lua)?)?;
             if !ok {
@@ -291,15 +307,17 @@ impl LuaUserData for LuaRegistry {
         // __newindex: config[hivename] = hive_ud
         methods.add_meta_method_mut(
             LuaMetaMethod::NewIndex,
-            |_lua, this, (field, value): (String, Value)| {
+            |_lua, _this, (_field, _value): (String, Value)| -> LuaResult<()> {
                 // Since Value::IntoLua for complex types doesn't return the raw UserData but a table/etc.,
                 // we might need to be careful here if the user tries to assign a Hive userdata directly.
                 // However, Value::from_lua doesn't support Hive userdata currently.
                 // Let's check if 'value' came from a LuaValue::UserData.
-                
-                // For now, let's just allow it if it's a Value::Nil or similar, 
+
+                // For now, let's just allow it if it's a Value::Nil or similar,
                 // but the original logic expected a Hive userdata.
-                Err(runtime("lament.config: value must be a Hive userdata (usels.Hive.new())"))
+                Err(runtime(
+                    "lament.config: value must be a Hive userdata (usels.Hive.new())",
+                ))
             },
         );
 
